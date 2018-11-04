@@ -1,0 +1,29 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=
+
+[Database Metadata]
+DATABASE=CurrentPowerlog.PLSQL
+PLATFORMS=IOS
+VERSIONS=9,10,11
+
+[Query Metadata]
+QUERY_NAME=powerlog_device_telephony_registration
+ACTIVITY=Device Status
+KEY_TIMESTAMP=TIMESTAMP
+
+[SQL Query]
+QUERY=
+   SELECT
+      DATETIME(TIMESTAMP, 'unixepoch') AS TIMESTAMP,
+      DATAIND AS "DATA IND",
+      OPERATOR,
+      STATUS,
+      CELLID AS "CELL ID",
+      DATAACTIVE AS "DATA ACTIVE",
+      DATAATTACHED AS "DATA ATTACHED",
+      HOME,
+      LAC,
+      ID AS "PLBBAGENT_EVENTFORWARD_TELEPHONYREGISTRATION TABLE ID" 
+   FROM
+      PLBBAGENT_EVENTFORWARD_TELEPHONYREGISTRATION

@@ -1,0 +1,34 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=Application Usage, shows application in focus on device.
+
+[Database Metadata]
+DATABASE=knowledgeC.db
+PLATFORM=IOS
+VERSIONS=11
+
+[Query Metadata]
+QUERY_NAME= knowledge_app_inFocus
+ACTIVITY=Application In Focus
+KEY_TIMESTAMP=START
+
+[SQL Query]
+QUERY=
+	SELECT
+	datetime(ZOBJECT.ZCREATIONDATE+978307200,'UNIXEPOCH') as "ENTRY CREATION",
+	ZOBJECT.ZVALUESTRING AS "BUNDLE ID", 
+	CASE ZOBJECT.ZSTARTDAYOFWEEK 
+	    WHEN "1" THEN "Sunday"
+	    WHEN "2" THEN "Monday"
+	    WHEN "3" THEN "Tuesday"
+	    WHEN "4" THEN "Wednesday"
+	    WHEN "5" THEN "Thursday"
+	    WHEN "6" THEN "Friday"
+	    WHEN "7" THEN "Saturday"
+	END "DAY OF WEEK",
+	ZOBJECT.ZSECONDSFROMGMT/3600 AS "GMT OFFSET",
+	datetime(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') as "START", 
+	datetime(ZOBJECT.ZENDDATE+978307200,'UNIXEPOCH') as "END", 
+	(ZOBJECT.ZENDDATE-ZOBJECT.ZSTARTDATE) as "USAGE IN SECONDS"
+	FROM ZOBJECT
+	WHERE ZSTREAMNAME IS "/app/inFocus"

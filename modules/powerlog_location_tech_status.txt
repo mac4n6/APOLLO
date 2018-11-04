@@ -1,0 +1,32 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=
+
+[Database Metadata]
+DATABASE=CurrentPowerlog.PLSQL
+PLATFORMS=IOS
+VERSIONS=9,10,11
+
+[Query Metadata]
+QUERY_NAME=powerlog_location_tech_status
+ACTIVITY=Device Status
+KEY_TIMESTAMP=TIMESTAMP
+
+[SQL Query]
+QUERY=
+	SELECT
+	   DATETIME(TIMESTAMP, 'unixepoch') AS TIMESTAMP,
+	   ACCESSORY,
+	   CELL,
+	   GPS,
+	   GPS_COARSE,
+	   LAC,
+	   MCC,
+	   NMEA,
+	   PIPELINE,
+	   SKYHOOK,
+	   WIFI,
+	   WIFI2,
+	   ID AS "PLLOCATIONAGENT_EVENTFORWARD_TECHSTATUS TABLE ID" 
+	FROM
+	   PLLOCATIONAGENT_EVENTFORWARD_TECHSTATUS

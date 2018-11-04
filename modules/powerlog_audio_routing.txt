@@ -1,0 +1,37 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=
+
+[Database Metadata]
+DATABASE=CurrentPowerlog.PLSQL
+PLATFORMS=IOS
+VERSIONS=9,10,11
+
+[Query Metadata]
+QUERY_NAME=powerlog_audio_routing
+ACTIVITY=Device State
+KEY_TIMESTAMP=TIMESTAMP
+
+[SQL Query]
+QUERY=
+   SELECT
+      DATETIME(TIMESTAMP, 'unixepoch') AS TIMESTAMP,
+      ACTIVEROUTE,
+      CASE
+         ACTIVE 
+         WHEN
+            "0" 
+         THEN
+            "NO" 
+         WHEN
+            "1" 
+         THEN
+            "YES" 
+      END "ACTIVE", 
+      ACTIVEPID AS "ACTIVE PID",
+      OUTPUTCATEGORY AS "OUTPUT CATEGORY",
+      HEADSETHASINPUT AS "HEADSET HAS INPUT",
+      HEADPHONESCONNECTED AS "HEADPHONES CONNECTED", 
+      ID AS "PLAUDIOAGENT_EVENTFORWARD_OUTPUT TABLE ID" 
+   FROM
+      PLAUDIOAGENT_EVENTFORWARD_ROUTING

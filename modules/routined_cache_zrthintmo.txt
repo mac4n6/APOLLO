@@ -1,0 +1,25 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=Semi-granular Location Data (~1 Week)
+
+[Database Metadata]
+DATABASE=Cache.sqlite
+PLATFORMS=IOS
+VERSIONS=11
+
+[Query Metadata]
+QUERY_NAME=routined_cache_zrthintmo
+ACTIVITY=Location
+KEY_TIMESTAMP=TIMESTAMP
+
+[SQL Query]
+QUERY=
+   SELECT
+      DATETIME(ZDATE + 978307200, 'unixepoch') AS "TIMESTAMP",
+      ZLATITUDE || ", " || ZLONGITUDE AS "COORDINATES",
+      ZSOURCE AS "SOURCE",
+      ZLATITUDE AS "LATITUDE",
+      ZLONGITUDE AS "LONGITUDE",
+      ZRTHINTMO.Z_PK AS "ZRTHINTMO TABLE ID" 
+   FROM
+      ZRTHINTMO 

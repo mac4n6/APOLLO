@@ -1,0 +1,25 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=
+
+[Database Metadata]
+DATABASE=coreduetd.db
+PLATFORMS=IOS
+VERSIONS=9
+
+[Query Metadata]
+QUERY_NAME=coreduetd_device_airplane_state
+ACTIVITY=Device State
+KEY_TIMESTAMP=CREATE TIME
+
+[SQL Query]
+QUERY=
+	select 
+	datetime(ZCREATIONDATE+978307200,'unixepoch') as "CREATE TIME",
+	time(ZLOCALTIME,'unixepoch') as "LOCAL DEVICE TIME",
+	time(ZCREATIONDATE-ZLOCALTIME,'unixepoch') as "TIME ZONE",
+	CASE ZAIRPLANEMODEON
+	    WHEN "0" THEN "Off"
+	    WHEN "1" THEN "On"
+	END "AIRPLANE MODE"
+	from ZCDDMAIRPLANEMODEEVENT

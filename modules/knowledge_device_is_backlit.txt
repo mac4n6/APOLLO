@@ -1,0 +1,44 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=Is the device screen backlit or not.
+
+[Database Metadata]
+DATABASE=knowledgeC.db
+PLATFORMS=IOS
+VERSIONS=11
+
+[Query Metadata]
+QUERY_NAME=knowledge_device_is_backlit
+ACTIVITY=Device Status
+KEY_TIMESTAMP=ENTRY CREATION
+
+[SQL Query]
+QUERY=
+   SELECT
+      DATETIME(ZOBJECT.ZCREATIONDATE + 978307200, 'UNIXEPOCH') AS "ENTRY CREATION",
+   CASE ZOBJECT.ZSTARTDAYOFWEEK 
+   WHEN "1" THEN "Sunday"
+   WHEN "2" THEN "Monday"
+   WHEN "3" THEN "Tuesday"
+   WHEN "4" THEN "Wednesday"
+   WHEN "5" THEN "Thursday"
+   WHEN "6" THEN "Friday"
+   WHEN "7" THEN "Saturday"
+   END "DAY OF WEEK", 
+   CASE
+      ZOBJECT.ZVALUEINTEGER
+      WHEN '0' THEN 'NO' 
+      WHEN '1' THEN 'YES' 
+   END "SCREEN IS BACKLIT",
+   ZOBJECT.ZSTREAMNAME AS "STREAM NAME",
+   ZOBJECT.Z_PK AS "ZOBJECT TABLE ID"
+   FROM
+      ZOBJECT 
+      LEFT JOIN
+         ZSTRUCTUREDMETADATA 
+         ON ZOBJECT.ZSTRUCTUREDMETADATA = ZSTRUCTUREDMETADATA.Z_PK 
+      LEFT JOIN
+         ZSOURCE 
+         ON ZOBJECT.ZSOURCE = ZSOURCE.Z_PK 
+   WHERE
+      ZSTREAMNAME is "/display/isBacklit"

@@ -1,0 +1,28 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=
+
+[Database Metadata]
+DATABASE=coreduetdClassD.db
+PLATFORMS=IOS
+VERSIONS=9
+
+[Query Metadata]
+QUERY_NAME=coreduetdclassd_device_plugin_state
+ACTIVITY=Device State
+KEY_TIMESTAMP=TIMESTAMP
+
+[SQL Query]
+QUERY=
+	SELECT 
+	datetime(ZCREATIONDATE+978307200,'unixepoch') as "TIMESTAMP",
+	time(ZCREATIONDATE-ZLOCALTIME,'unixepoch') as "TIME ZONE", 
+	CASE ZCABLESTATE
+	    WHEN "0" THEN "Unplugged"
+	    WHEN "1" THEN "Plugged In"
+	END "CABLE STATE"
+	FROM ZCDDMPLUGINEVENT
+
+
+
+

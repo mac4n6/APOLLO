@@ -1,0 +1,22 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=
+
+[Database Metadata]
+DATABASE=ADDataStore.sqlitedb
+PLATFORMS=IOS
+VERSIONS=9,10,11
+
+[Query Metadata]
+QUERY_NAME=aggregate_dictionary_scalars
+ACTIVITY=Aggregate Dictionary - Scalar
+KEY_TIMESTAMP=DAY
+
+[SQL Query]
+QUERY=
+	SELECT
+	   DATE(DAYSSINCE1970*86400, 'unixepoch') AS DAY,
+	   KEY,
+	   VALUE 
+	FROM
+	   SCALARS
