@@ -9,7 +9,7 @@
 * Many more modules to come!
 
 ## Usage
-`python apollo.py -output {csv, sql} <modules directyr> <data directory>`
+`python apollo.py -output {csv, sql} <modules directory> <data directory>`
 
 ## Output Options
 * csv - CSV
