@@ -1,10 +1,10 @@
 [Module Metadata]
 AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
-MODULE_NOTES=Original time is adjusted using PLSTORAGEOPERATOR_EVENTFORWARD_TIMEOFFSET Table
+MODULE_NOTES=Application/Device screen state/orientation
 
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
-PLATFORM=IOS
+PLATFORMS=IOS
 VERSIONS=11
 
 [Query Metadata]
@@ -25,7 +25,7 @@ QUERY=
       DATETIME(SCREEN_STATE_TIMESTAMP, 'unixepoch') AS ORIGINAL_SCREEN_STATE_TIMESTAMP,
       DATETIME(TIME_OFFSET_TIMESTAMP, 'unixepoch') AS OFFSET_TIMESTAMP,
       SYSTEM AS TIME_OFFSET,
-      SCREENSTATE_ID
+      SCREENSTATE_ID AS "PLSCREENSTATEAGENT_EVENTFORWARD_SCREENSTATE TABLE ID"
    FROM
       (
          SELECT
@@ -58,8 +58,6 @@ QUERY=
                   PLSCREENSTATEAGENT_EVENTFORWARD_SCREENSTATE 
                   LEFT JOIN
                      PLSTORAGEOPERATOR_EVENTFORWARD_TIMEOFFSET 
-               WHERE
-                  SCREEN_STATE_TIMESTAMP > TIME_OFFSET_TIMESTAMP 
             )
             AS SCREENSTATE 
          GROUP BY

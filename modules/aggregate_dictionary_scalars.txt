@@ -1,6 +1,6 @@
 [Module Metadata]
 AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
-MODULE_NOTES=
+MODULE_NOTES=Keeping track of various values on a per-day basis.
 
 [Database Metadata]
 DATABASE=ADDataStore.sqlitedb
