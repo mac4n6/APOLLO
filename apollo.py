@@ -31,71 +31,87 @@ import sys
 import argparse
 from argparse import RawTextHelpFormatter
 import os
-from ConfigParser import SafeConfigParser
+from ConfigParser import RawConfigParser
 from collections import OrderedDict
 
-def parse_module_definition(mod_def):
-	mod_name = mod_def
-	parser = SafeConfigParser()
-	parser.read(mod_def)
+def parse_module_definition(mod_info):
+	print "Parsing Modules..."
 
-	query_name = parser.get('Query Metadata', 'QUERY_NAME')
-	database_name = parser.get('Database Metadata', 'DATABASE')
-	activity = parser.get('Query Metadata', 'ACTIVITY')
-	key_timestamp = parser.get('Query Metadata', 'KEY_TIMESTAMP')
-	sql_query = parser.get('SQL Query', 'QUERY')
+	database_names = set()
+	for mod_def, mod_data in mod_info.items():
+		mod_name = mod_def
+		parser = RawConfigParser()
+		parser.read(mod_def)
 
-	run_module(mod_name,query_name,database_name,activity,key_timestamp,sql_query)
+		query_name = parser.get('Query Metadata', 'QUERY_NAME')
+		database_name = parser.get('Database Metadata', 'DATABASE')
+		activity = parser.get('Query Metadata', 'ACTIVITY')
+		key_timestamp = parser.get('Query Metadata', 'KEY_TIMESTAMP')
+		sql_query = parser.get('SQL Query', 'QUERY')
 
-def run_module(mod_name,query_name,database_name,activity,key_timestamp,sql_query):
+		database_names.add(database_name)
+		mod_info[mod_def] = [query_name, database_name, activity, key_timestamp, sql_query]
+	
+	print "Parsing: ", len(mod_info), " modules."
 
+	print "Searching for database files..."
 	for root, dirs, filenames in os.walk(data_dir):
 		for f in filenames:
-			if f == database_name:
-			#if f in database_name:
-				db = os.path.join(root,f)
-				print "\tExecuting module on: " + db
-				conn = sqlite3.connect(db)
-				with conn:
-					conn.row_factory = sqlite3.Row
-					cur = conn.cursor()
+			if f in database_names:
+				for mod_def, mod_data in mod_info.items():
+					if mod_data[1] == f:
+						mod_info[mod_def].append(os.path.join(root,f))
 
-				try:
-					sql = sql_query
-					cur.execute(sql)
-					rows = cur.fetchall()
+	for mod_def, mod_data in mod_info.items():
+		print mod_def, ":",  len(mod_data)-5, "databases."
 
-					headers = []
-					for x in cur.description:
-						headers.append(x[0])
+		run_module(mod_def,mod_data[0],mod_data[5:],mod_data[2],mod_data[3],mod_data[4])
 
-					for row in rows:
-						col_row = OrderedDict()
-						col_row = (OrderedDict(zip(headers,row)))
+def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_query):
 
-						data_stuff = ""
+	for db in database_names:
+		print "\tExecuting module on: " + db
+		conn = sqlite3.connect(db)
+		with conn:
+			conn.row_factory = sqlite3.Row
+			cur = conn.cursor()
 
-						for k,v in col_row.iteritems():
+		try:
+			sql = sql_query
+			cur.execute(sql)
+			rows = cur.fetchall()
 
-							if isinstance(v,str):
-								data = "[" + str(k) + ": " + str(v) + "] "
-							elif isinstance(v,unicode):
-								data = "[" + str(k) + ": " + v.encode('utf8').decode('utf8') + "] "
-							elif isinstance(v,int):
-								data = "[" + str(k) + ": " + str(v) + "] "
-							else:
-								data = "[" + str(k) + ": " + str(v) + "] "
+			headers = []
+			for x in cur.description:
+				headers.append(x[0])
 
-							data_stuff = data_stuff + data
+			for row in rows:
+				col_row = OrderedDict()
+				col_row = (OrderedDict(zip(headers,row)))
 
-						if args.output == 'csv':
-							loccsv.writerow([col_row[key_timestamp],activity, data_stuff,db,mod_name])
-						elif args.output == 'sql':
-							key = col_row[key_timestamp]
-							cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
+				data_stuff = ""
 
-				except:
-					print "\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema."		
+				for k,v in col_row.iteritems():
+
+					if isinstance(v,str):
+						data = "[" + str(k) + ": " + str(v) + "] "
+					elif isinstance(v,unicode):
+						data = "[" + str(k) + ": " + v.encode('utf8').decode('utf8') + "] "
+					elif isinstance(v,int):
+						data = "[" + str(k) + ": " + str(v) + "] "
+					else:
+						data = "[" + str(k) + ": " + str(v) + "] "
+
+					data_stuff = data_stuff + data
+
+				if args.output == 'csv':
+					loccsv.writerow([col_row[key_timestamp],activity, data_stuff,db,mod_name])
+				elif args.output == 'sql':
+					key = col_row[key_timestamp]
+					cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
+
+		except:
+			print "\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema."		
 
 if __name__ == "__main__":
 
@@ -103,9 +119,10 @@ if __name__ == "__main__":
 	Apple Pattern of Life Lazy Outputter (APoLLO)\
 	\n\nVery lazy parser to extract pattern-of-life data from SQLite databases on iOS/macOS datasets (though really any SQLite database if you make a configuration file and provide it the proper metadata details.\
 	\n\nOutputs include SQLite Database or CSV.\
-	\n\n\tVersion: BETA 11042018 - TESTING PURPOSES ONLY, SERIOUSLY.\
-	\n\tUpdated: 11/04/2018\
-	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com"
+	\n\n\tVersion: BETA 12122018 - TESTING PURPOSES ONLY, SERIOUSLY.\
+	\n\tUpdated: 12/12/2018\
+	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com\
+	\n\tAdded Efficiency: Sam Alptekin of @sjc_CyberCrimes"
 		, prog='apollo.py'
 		, formatter_class=RawTextHelpFormatter)
 	parser.add_argument('-output', choices=['sql','csv'], action="store", help="sql=SQLite or csv=CSV")
@@ -129,6 +146,8 @@ if __name__ == "__main__":
 			loccsv = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 			loccsv.writerow(['Timestamp','Activity', 'Output','Database','Module'])
 
+			mod_info = {}
+
 			for root, dirs, filenames in os.walk(mod_dir):
 				for f in filenames: 
 					if f.endswith(".txt"):
@@ -136,8 +155,9 @@ if __name__ == "__main__":
 						fread = open(mod_def,'r')
 						contents = fread.read()
 						if "[Database Metadata]" in contents:
-							print "Parsing Module: " + f 
-							parse_module_definition(mod_def)
+							mod_info[mod_def] = []
+
+			parse_module_definition(mod_def)
 
 			print "\n===> Lazily outputted to CSV file: apollo.csv\n"
 
@@ -149,6 +169,8 @@ if __name__ == "__main__":
 		cw = connw.cursor()
 		cw.execute("CREATE TABLE APOLLO(Key timestamp, Activity TEXT, Output TEXT, Database TEXT, Module TEXT)")
 		
+		mod_info = {}
+
 		for root, dirs, filenames in os.walk(mod_dir):
 			for f in filenames: 
 				if f.endswith(".txt"):
@@ -156,8 +178,10 @@ if __name__ == "__main__":
 					fread = open(mod_def,'r')
 					contents = fread.read()
 					if "[Database Metadata]" in contents:
-						print "Parsing Module: " + f 
-						parse_module_definition(mod_def)
+						mod_info[mod_def] = []
+
+		parse_module_definition(mod_info)
+
 		connw.commit()
 
 		print "\n===> Lazily outputted to SQLite file: apollo.db\n"
