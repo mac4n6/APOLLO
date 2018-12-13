@@ -16,7 +16,8 @@
 * sql - SQLite Database
 
 ## Data Directory Pro Tip
-* Extract databases as it will take forever (1hr+) to run on full disk dump, it works, but be patient.
+* ~~Extract databases as it will take forever (1hr+) to run on full disk dump, it works, but be patient.~~
+* Not anymore, thanks to Sam Alptekin of @sjc_CyberCrimes 👍
 
 ## References
 * See [mac4n6.com](https://mac4n6.com) for more info on these databases!
