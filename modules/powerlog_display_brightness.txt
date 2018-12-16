@@ -5,7 +5,7 @@ MODULE_NOTES=Screen Brightness Percentage
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORMS=IOS
-VERSIONS=9,10,11
+VERSIONS=9,10,11,12
 
 [Query Metadata]
 QUERY_NAME=powerlog_display_brightness

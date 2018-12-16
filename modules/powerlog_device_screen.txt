@@ -5,7 +5,7 @@ MODULE_NOTES=Records which Springboard screen device is on. Homescreen(s)=2 Widg
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORMS=IOS
-VERSIONS=9,10,11
+VERSIONS=9,10,11,12
 
 [Query Metadata]
 QUERY_NAME=powerlog_device_screen
