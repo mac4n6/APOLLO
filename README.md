@@ -20,4 +20,8 @@
 * Not anymore, thanks to Sam Alptekin of @sjc_CyberCrimes 👍
 
 ## References
-* See [mac4n6.com](https://mac4n6.com) for more info on these databases!
+* [Knowledge is Power! Using the macOS/iOS knowledgeC.db Database to Determine Precise User and Application Usage](https://www.mac4n6.com/blog/2018/8/5/knowledge-is-power-using-the-knowledgecdb-database-on-macos-and-ios-to-determine-precise-user-and-application-usage)
+* [Knowledge is Power II – A Day in the Life of My iPhone using knowledgeC.db](https://www.mac4n6.com/blog/2018/9/12/knowledge-is-power-ii-a-day-in-the-life-of-my-iphone-using-knowledgecdb)
+* [On the First Day of APOLLO, My True Love Gave to Me - A Python Script – An Introduction to the Apple Pattern of Life Lazy Output’er (APOLLO) Blog Series](https://www.mac4n6.com/blog/2018/12/14/on-the-first-day-of-apollo-my-true-love-gave-to-me-a-python-script-an-introduction-to-the-apple-pattern-of-life-lazy-outputer-apollo-blog-series)
+* [On the Second Day of APOLLO, My True Love Gave to Me - Holiday Treats and a Trip to the Gym - A Look at iOS Health Data](https://www.mac4n6.com/blog/2018/12/15/on-the-second-day-of-apollo-my-true-love-gave-to-me-holiday-treats-and-a-trip-to-the-gym-a-look-at-ios-health-data)
+* [On the Third Day of APOLLO, My True Love Gave to Me – Application Usage to Determine Who Has Been Naughty or Nice](https://www.mac4n6.com/blog/2018/12/16/on-the-third-day-of-apollo-my-true-love-gave-to-me-application-usage-to-determine-who-has-been-naughty-or-nice)
