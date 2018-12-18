@@ -105,11 +105,13 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 					data_stuff = data_stuff + data
 
 				if args.output == 'csv':
-					loccsv.writerow([col_row[key_timestamp],activity, data_stuff,db,mod_name])
+					try:
+						loccsv.writerow([col_row[key_timestamp],activity, data_stuff,db,mod_name])
+					except:
+						loccsv.writerow([col_row[key_timestamp],activity, data_stuff.encode('utf8'),db,mod_name])
 				elif args.output == 'sql':
 					key = col_row[key_timestamp]
 					cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
-
 		except:
 			print "\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema."		
 
@@ -119,8 +121,8 @@ if __name__ == "__main__":
 	Apple Pattern of Life Lazy Outputter (APoLLO)\
 	\n\nVery lazy parser to extract pattern-of-life data from SQLite databases on iOS/macOS datasets (though really any SQLite database if you make a configuration file and provide it the proper metadata details.\
 	\n\nOutputs include SQLite Database or CSV.\
-	\n\n\tVersion: BETA 12122018 - TESTING PURPOSES ONLY, SERIOUSLY.\
-	\n\tUpdated: 12/12/2018\
+	\n\n\tVersion: BETA 12172018 - TESTING PURPOSES ONLY, SERIOUSLY.\
+	\n\tUpdated: 12/17/2018\
 	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com\
 	\n\tAdded Efficiency: Sam Alptekin of @sjc_CyberCrimes"
 		, prog='apollo.py'
@@ -157,7 +159,7 @@ if __name__ == "__main__":
 						if "[Database Metadata]" in contents:
 							mod_info[mod_def] = []
 
-			parse_module_definition(mod_def)
+			parse_module_definition(mod_info)
 
 			print "\n===> Lazily outputted to CSV file: apollo.csv\n"
 
