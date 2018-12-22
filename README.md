@@ -7,6 +7,7 @@
 * Find a bug or a better query, let me know!
 * Extra warning on PowerLog modules, timestamps may be in the past and/or future - testing these.
 * Many more modules to come!
+* Python 2.7, probably doesn't run on 3 without tweaking code.
 
 ## Usage
 `python apollo.py -output {csv, sql} <modules directory> <data directory>`
