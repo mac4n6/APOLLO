@@ -10,7 +10,7 @@ VERSIONS=11
 [Query Metadata]
 QUERY_NAME=knowledge_device_pluggedin
 ACTIVITY=Device Status
-KEY_TIMESTAMP=ENTRY CREATION
+KEY_TIMESTAMP=START
 
 [SQL Query]
 QUERY=
