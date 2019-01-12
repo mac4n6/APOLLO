@@ -1,11 +1,11 @@
 [Module Metadata]
 AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
-MODULE_NOTES=Network Usage Traffic by Process
+MODULE_NOTES=Network Usage Traffic by Process. Query should work on iOS 8/9 if ZXIN/ZXOUT lines are removed.
 
 [Database Metadata]
 DATABASE=netusage.sqlite
 PLATFORMS=IOS
-VERSIONS=8,9,10,11
+VERSIONS=10,11
 
 [Query Metadata]
 QUERY_NAME=netusage_zliveusage
@@ -26,6 +26,8 @@ QUERY=
         ZWWANOUT AS "WWAN OUT",
         ZWIREDIN AS "WIRED IN",
         ZWIREDOUT AS "WIRED OUT",
+        ZXIN AS "X IN",
+        ZXOUT AS "X OUT",
         ZLIVEUSAGE.Z_PK AS "ZLIVEUSAGE TABLE ID" 
     FROM ZLIVEUSAGE 
     LEFT JOIN ZPROCESS ON ZPROCESS.Z_PK = ZLIVEUSAGE.ZHASPROCESS
