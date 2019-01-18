@@ -12,7 +12,7 @@ QUERY_NAME=routined_local_vehicle_parked
 ACTIVITY=Location
 KEY_TIMESTAMP=DATE
 
-[SQL Query]
+[SQL Query 11]
 QUERY=
 	SELECT
 	   DATETIME(ZRTVEHICLEEVENTMO.ZDATE + 978307200, 'unixepoch') AS "DATE",

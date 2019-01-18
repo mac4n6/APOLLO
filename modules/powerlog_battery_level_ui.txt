@@ -12,7 +12,7 @@ QUERY_NAME=powerlog_battery_level_ui
 ACTIVITY=Device Status
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query]
+[SQL Query 9,10,11,12]
 QUERY=
    SELECT
       DATETIME(TIMESTAMP, 'unixepoch') AS TIMESTAMP,

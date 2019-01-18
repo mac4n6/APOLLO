@@ -5,14 +5,14 @@ MODULE_NOTES=Lightning Connector Status/Power Mode
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORMS=IOS
-VERSIONS=9,10,11,12
+VERSIONS=10,11,12
 
 [Query Metadata]
 QUERY_NAME=powerlog_lightnining_connector_status
 ACTIVITY=Device Status
 KEY_TIMESTAMP=ADJUSTED_TIMESTAMP
 
-[SQL Query]
+[SQL Query 10,11,12]
 QUERY=
   	SELECT
 		DATETIME(LIGHTNINGCONNECTOR_TIMESTAMP + SYSTEM, 'unixepoch','localtime') AS ADJUSTED_TIMESTAMP,

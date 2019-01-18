@@ -5,14 +5,14 @@ MODULE_NOTES=
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORMS=IOS
-VERSIONS=9,10,11,12
+VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=powerlog_mobilebackup
 ACTIVITY=Network Usage
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query]
+[SQL Query 11,12]
 QUERY=
 	SELECT
 	   DATETIME(TIMESTAMP, 'unixepoch') AS TIMESTAMP,

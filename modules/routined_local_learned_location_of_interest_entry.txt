@@ -12,7 +12,7 @@ QUERY_NAME=routined_local_learned_location_of_interest_entry
 ACTIVITY=Location
 KEY_TIMESTAMP=ENTRY
 
-[SQL Query]
+[SQL Query 11]
 QUERY=
 	SELECT
 	   DATETIME(ZRTLEARNEDLOCATIONOFINTERESTVISITMO.ZENTRYDATE + 978307200, 'unixepoch') AS "ENTRY",
