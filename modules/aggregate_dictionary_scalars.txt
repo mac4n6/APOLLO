@@ -5,18 +5,18 @@ MODULE_NOTES=Keeping track of various values on a per-day basis.
 [Database Metadata]
 DATABASE=ADDataStore.sqlitedb
 PLATFORMS=IOS
-VERSIONS=9,10,11
+VERSIONS=8,9,10,11
 
 [Query Metadata]
 QUERY_NAME=aggregate_dictionary_scalars
 ACTIVITY=Aggregate Dictionary - Scalar
 KEY_TIMESTAMP=DAY
 
-[SQL Query]
+[SQL Query 8,9,10,11]
 QUERY=
 	SELECT
-	   DATE(DAYSSINCE1970*86400, 'unixepoch') AS DAY,
 	   KEY AS "KEY",
-	   VALUE AS "VALUE" 
+	   VALUE AS "VALUE",
+	   DATE(DAYSSINCE1970*86400, 'unixepoch') AS DAY
 	FROM
 	   SCALARS

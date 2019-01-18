@@ -1,0 +1,28 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=Health Flights Climbed
+
+[Database Metadata]
+DATABASE=healthdb_secure.sqlite
+PLATFORMS=IOS
+VERSIONS=9,10,11,12
+
+[Query Metadata]
+QUERY_NAME=health_flights
+ACTIVITY=Health Flights Climbed
+KEY_TIMESTAMP=START DATE
+
+[SQL Query 9,10,11,12]
+QUERY=
+	SELECT
+	   QUANTITY AS "FLIGHTS CLIMBED",
+	   DATETIME(SAMPLES.START_DATE + 978307200, 'unixepoch') AS "START DATE",
+	   DATETIME(SAMPLES.END_DATE + 978307200, 'unixepoch') AS "END DATE",
+	   SAMPLES.DATA_ID AS "SAMPLES TABLE ID" 
+	FROM
+	   SAMPLES 
+	   LEFT OUTER JOIN
+	      QUANTITY_SAMPLES 
+	      ON SAMPLES.DATA_ID = QUANTITY_SAMPLES.DATA_ID 
+	WHERE
+	   SAMPLES.DATA_TYPE = 12

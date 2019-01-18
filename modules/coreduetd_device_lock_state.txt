@@ -1,0 +1,25 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=Lock State
+
+[Database Metadata]
+DATABASE=coreduetd.db
+PLATFORMS=IOS
+VERSIONS=8,9
+
+[Query Metadata]
+QUERY_NAME=coreduetd_device_lock_state
+ACTIVITY=Device State
+KEY_TIMESTAMP=CREATE TIME
+
+[SQL Query 8,9]
+QUERY=
+	SELECT 
+		CASE ZLOCKSTATE
+		    WHEN "0" THEN "Locked"
+		    WHEN "1" THEN "Unlocked"
+		END "LOCK STATE",
+		DATETIME(ZCREATIONDATE+978307200,"unixepoch") as "CREATE TIME",
+		TIME(ZLOCALTIME,"unixepoch") as "LOCAL DEVICE TIME",
+		TIME(ZCREATIONDATE-ZLOCALTIME,"unixepoch") as "TIME ZONE"
+	FROM ZCDDMSCREENLOCKEVENT

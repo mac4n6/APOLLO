@@ -1,9 +1,9 @@
 [Module Metadata]
 AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
-MODULE_NOTES=Data Usage Traffic by Process. Can also be used on DataUsage-watch.sqlite
+MODULE_NOTES=Data Usage Traffic by Process.
 
 [Database Metadata]
-DATABASE=DataUsage.sqlite
+DATABASE=DataUsage.sqlite,DataUsage-watch.sqlite
 PLATFORMS=IOS
 VERSIONS=8,9,10,11,12
 
@@ -12,7 +12,7 @@ QUERY_NAME=datausage_zliveusage
 ACTIVITY=Data Usage
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query]
+[SQL Query 8,9,10,11,12]
 QUERY=
 	SELECT
 		DATETIME(ZLIVEUSAGE.ZTIMESTAMP + 978307200, 'unixepoch') AS "TIMESTAMP",
