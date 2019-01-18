@@ -12,22 +12,15 @@ QUERY_NAME=powerlog_volume_level
 ACTIVITY=Device State
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query]
+[SQL Query 9,10,11]
 QUERY=
    SELECT
       DATETIME(TIMESTAMP, 'unixepoch') AS TIMESTAMP,
       VOLUME,
-      CASE
-         MUTED 
-         WHEN
-            "0" 
-         THEN
-            "NO" 
-         WHEN
-            "1" 
-         THEN
-            "YES" 
-      END
-      "MUTED", ID AS "PLAUDIOAGENT_EVENTFORWARD_OUTPUT TABLE ID" 
+      CASE MUTED 
+         WHEN "0" THEN "NO" 
+         WHEN "1" THEN "YES" 
+      END "MUTED", 
+      ID AS "PLAUDIOAGENT_EVENTFORWARD_OUTPUT TABLE ID" 
    FROM
       PLAUDIOAGENT_EVENTFORWARD_OUTPUT
