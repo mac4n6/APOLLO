@@ -1,6 +1,6 @@
 #!/usr/bin/python
 '''
-Copyright (c) 2018, Station X Labs, LLC
+Copyright (c) 2019, Station X Labs, LLC
 All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -33,6 +33,7 @@ from argparse import RawTextHelpFormatter
 import os
 from ConfigParser import RawConfigParser
 from collections import OrderedDict
+import string
 
 def parse_module_definition(mod_info):
 	print "Parsing Modules..."
@@ -44,28 +45,50 @@ def parse_module_definition(mod_info):
 		parser.read(mod_def)
 
 		query_name = parser.get('Query Metadata', 'QUERY_NAME')
-		database_name = parser.get('Database Metadata', 'DATABASE')
+		database_name = parser.get('Database Metadata', 'DATABASE').split(',')
 		activity = parser.get('Query Metadata', 'ACTIVITY')
 		key_timestamp = parser.get('Query Metadata', 'KEY_TIMESTAMP')
-		sql_query = parser.get('SQL Query', 'QUERY')
 
-		database_names.add(database_name)
-		mod_info[mod_def] = [query_name, database_name, activity, key_timestamp, sql_query]
-	
+		for database in database_name:
+			database_names.add(database)
+
+		if version == 'yolo':
+			for section in parser.sections():
+				try:
+					if "SQL Query" in section:
+						sql_query = parser.get(section,'QUERY')
+						mod_info[mod_def] = [query_name, database, activity, key_timestamp, sql_query]
+				except:
+					pass
+		else:			
+			for section in parser.sections():
+				try:
+					if version in section:
+						sql_query = parser.get(section,'QUERY')
+						mod_info[mod_def] = [query_name, database, activity, key_timestamp, sql_query]
+				except:
+					pass
+
 	print "Parsing: ", len(mod_info), " modules."
 
 	print "Searching for database files..."
+	print
 	for root, dirs, filenames in os.walk(data_dir):
 		for f in filenames:
 			if f in database_names:
 				for mod_def, mod_data in mod_info.items():
-					if mod_data[1] == f:
-						mod_info[mod_def].append(os.path.join(root,f))
+					if mod_data:
+						if mod_data[1] == f:
+							mod_info[mod_def].append(os.path.join(root,f))
 
 	for mod_def, mod_data in mod_info.items():
-		print mod_def, ":",  len(mod_data)-5, "databases."
-
-		run_module(mod_def,mod_data[0],mod_data[5:],mod_data[2],mod_data[3],mod_data[4])
+		if mod_data:
+			print mod_def, ":",  len(mod_data)-5, "databases."
+			run_module(mod_def,mod_data[0],mod_data[5:],mod_data[2],mod_data[3],mod_data[4])
+			print
+		else:
+			print mod_def, ": Module not supported for version of data provided."
+			print		
 
 def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_query):
 
@@ -80,6 +103,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 			sql = sql_query
 			cur.execute(sql)
 			rows = cur.fetchall()
+			print "\t\tNumber of Records: " + str(len(rows))
 
 			headers = []
 			for x in cur.description:
@@ -92,7 +116,6 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 				data_stuff = ""
 
 				for k,v in col_row.iteritems():
-
 					if isinstance(v,str):
 						data = "[" + str(k) + ": " + str(v) + "] "
 					elif isinstance(v,unicode):
@@ -102,18 +125,22 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 					else:
 						data = "[" + str(k) + ": " + str(v) + "] "
 
-					data_stuff = data_stuff + data
+					try:
+						data_stuff = data_stuff + data
+					except:
+						data_stuff = filter(lambda x: x in string.printable, data_stuff)
+						data_stuff = data_stuff + data
 
-				if args.output == 'csv':
+				if args.o == 'csv':
 					try:
 						loccsv.writerow([col_row[key_timestamp],activity, data_stuff,db,mod_name])
 					except:
 						loccsv.writerow([col_row[key_timestamp],activity, data_stuff.encode('utf8'),db,mod_name])
-				elif args.output == 'sql':
+				elif args.o == 'sql':
 					key = col_row[key_timestamp]
 					cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
 		except:
-			print "\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema."		
+			print "\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data (ie: cache_encryptedB.db)."	
 
 if __name__ == "__main__":
 
@@ -121,15 +148,18 @@ if __name__ == "__main__":
 	Apple Pattern of Life Lazy Outputter (APoLLO)\
 	\n\nVery lazy parser to extract pattern-of-life data from SQLite databases on iOS/macOS datasets (though really any SQLite database if you make a configuration file and provide it the proper metadata details.\
 	\n\nOutputs include SQLite Database or CSV.\
-	\n\n\tVersion: BETA 12172018 - TESTING PURPOSES ONLY, SERIOUSLY.\
-	\n\tUpdated: 12/17/2018\
+	\n\nYolo! Meant to run on anything and everything, like a honey badger - it don't care. Can be used with multiple dumps of devices. It will run all queries in all modules with no regard for versioning. May lead to redundant data since it can run more than one similar query. Be careful with this option.\
+	\n\n\tVersion: BETA 01172019 - TESTING PURPOSES ONLY, SERIOUSLY.\
+	\n\tUpdated: 01/17/2019\
 	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com\
 	\n\tAdded Efficiency: Sam Alptekin of @sjc_CyberCrimes"
 		, prog='apollo.py'
 		, formatter_class=RawTextHelpFormatter)
-	parser.add_argument('-output', choices=['sql','csv'], action="store", help="sql=SQLite or csv=CSV")
-	parser.add_argument('modules_directory')
-	parser.add_argument('data_dir_to_analyze')
+	parser.add_argument('-o', choices=['sql','csv'], required=True, action="store", help="Output: sql=SQLite or csv=CSV (required)")
+	parser.add_argument('-p', choices=['ios','mac','yolo'], required=True, action="store", help="Platform: ios=iOS [supported] or mac=macOS [not yet supported] (required).")
+	parser.add_argument('-v', choices=['8','9','10','11','12','yolo'], required=True, action="store",help="Version of OS (required).")
+	parser.add_argument('modules_directory',help="Path to Module Directory")
+	parser.add_argument('data_dir_to_analyze',help="Path to Data Directory. It can be full file system dump or directory of extracted databases, it is recursive.")
 
 	args = parser.parse_args()
 
@@ -141,8 +171,10 @@ if __name__ == "__main__":
 
 	mod_dir = args.modules_directory
 	data_dir = args.data_dir_to_analyze
+	platform = args.p
+	version = args.v
 	
-	if args.output == 'csv':
+	if args.o == 'csv':
 
 		with open('apollo.csv', 'wb') as csvfile:
 			loccsv = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
@@ -163,7 +195,7 @@ if __name__ == "__main__":
 
 			print "\n===> Lazily outputted to CSV file: apollo.csv\n"
 
-	if args.output == 'sql':
+	if args.o == 'sql':
 
 		if os.path.isfile("apollo.db"):
 			os.remove("apollo.db")
