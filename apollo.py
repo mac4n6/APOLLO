@@ -35,8 +35,7 @@ from collections import OrderedDict
 import string
 
 # Version check
-from sys import version_info
-if version_info[0] == 2:
+if sys.version_info[0] == 2:
 	from ConfigParser import RawConfigParser
 else:
 	from configparser import RawConfigParser
