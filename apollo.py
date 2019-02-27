@@ -31,12 +31,18 @@ import sys
 import argparse
 from argparse import RawTextHelpFormatter
 import os
-from ConfigParser import RawConfigParser
 from collections import OrderedDict
 import string
 
+# Version check
+from sys import version_info
+if version_info[0] == 2:
+	from ConfigParser import RawConfigParser
+else:
+	from configparser import RawConfigParser
+
 def parse_module_definition(mod_info):
-	print "Parsing Modules..."
+	print("Parsing Modules...")
 
 	database_names = set()
 	for mod_def, mod_data in mod_info.items():
@@ -69,10 +75,10 @@ def parse_module_definition(mod_info):
 				except:
 					pass
 
-	print "Parsing: ", len(mod_info), " modules."
+	print("Parsing: ", len(mod_info), " modules.")
 
-	print "Searching for database files..."
-	print
+	print("Searching for database files...")
+	print()
 	for root, dirs, filenames in os.walk(data_dir):
 		for f in filenames:
 			if f in database_names:
@@ -83,17 +89,17 @@ def parse_module_definition(mod_info):
 
 	for mod_def, mod_data in mod_info.items():
 		if mod_data:
-			print mod_def, ":",  len(mod_data)-5, "databases."
+			print(mod_def, ":",  len(mod_data)-5, "databases.")
 			run_module(mod_def,mod_data[0],mod_data[5:],mod_data[2],mod_data[3],mod_data[4])
-			print
+			print()
 		else:
-			print mod_def, ": Module not supported for version of data provided."
-			print		
+			print(mod_def, ": Module not supported for version of data provided.")
+			print()
 
 def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_query):
 
 	for db in database_names:
-		print "\tExecuting module on: " + db
+		print("\tExecuting module on: " + db)
 		conn = sqlite3.connect(db)
 		with conn:
 			conn.row_factory = sqlite3.Row
@@ -103,7 +109,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 			sql = sql_query
 			cur.execute(sql)
 			rows = cur.fetchall()
-			print "\t\tNumber of Records: " + str(len(rows))
+			print("\t\tNumber of Records: " + str(len(rows)))
 
 			headers = []
 			for x in cur.description:
@@ -140,7 +146,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 					key = col_row[key_timestamp]
 					cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
 		except:
-			print "\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data (ie: cache_encryptedB.db)."	
+			print("\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data (ie: cache_encryptedB.db).")
 
 if __name__ == "__main__":
 
@@ -193,7 +199,7 @@ if __name__ == "__main__":
 
 			parse_module_definition(mod_info)
 
-			print "\n===> Lazily outputted to CSV file: apollo.csv\n"
+			print("\n===> Lazily outputted to CSV file: apollo.csv\n")
 
 	if args.o == 'sql':
 
@@ -218,4 +224,4 @@ if __name__ == "__main__":
 
 		connw.commit()
 
-		print "\n===> Lazily outputted to SQLite file: apollo.db\n"
+		print("\n===> Lazily outputted to SQLite file: apollo.db\n")
