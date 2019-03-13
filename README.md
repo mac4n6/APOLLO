@@ -15,6 +15,7 @@
 ## Output Options
 * csv - CSV
 * sql - SQLite Database
+* icsv - Individual CSV files for each SQL query
 
 ## Data Directory Pro Tip
 * ~~Extract databases as it will take forever (1hr+) to run on full disk dump, it works, but be patient.~~
