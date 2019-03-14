@@ -10,11 +10,20 @@
 * Python 2.7, probably doesn't run on 3 without tweaking code.
 
 ## Usage
-`python apollo.py -output {csv, sql} <modules directory> <data directory>`
+`python apollo.py -o {csv, sql} -p {ios, mac, yolo} -v {8,9,10,11,12,yolo} <modules directory> <data directory>`
 
-## Output Options
+## Output Options (-o)
 * csv - CSV
 * sql - SQLite Database
+
+## Platform Options (-p)
+* iOS
+* Mac
+* Yolo - Just parse whatever.
+
+## Version Options (-v)
+* iOS 8, 9, 10, 11, 12
+* Yolo - Just parse whatever.
 
 ## Data Directory Pro Tip
 * ~~Extract databases as it will take forever (1hr+) to run on full disk dump, it works, but be patient.~~
