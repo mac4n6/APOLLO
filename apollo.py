@@ -4,14 +4,14 @@ Copyright (c) 2019, Station X Labs, LLC
 All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
-	* Redistributions of source code must retain the above copyright
-	  notice, this list of conditions and the following disclaimer.
-	* Redistributions in binary form must reproduce the above copyright
-	  notice, this list of conditions and the following disclaimer in the
-	  documentation and/or other materials provided with the distribution.
-	* Neither the name of the Station X Labs, LLC nor the
-	  names of its contributors may be used to endorse or promote products
-	  derived from this software without specific prior written permission.
+        * Redistributions of source code must retain the above copyright
+          notice, this list of conditions and the following disclaimer.
+        * Redistributions in binary form must reproduce the above copyright
+          notice, this list of conditions and the following disclaimer in the
+          documentation and/or other materials provided with the distribution.
+        * Neither the name of the Station X Labs, LLC nor the
+          names of its contributors may be used to endorse or promote products
+          derived from this software without specific prior written permission.
 THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
 ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
 WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
@@ -35,7 +35,7 @@ from ConfigParser import RawConfigParser
 from collections import OrderedDict
 import string
 
-def parse_module_definition(mod_info):
+def parse_module_definition(mod_info, cursor=None):
         print "Parsing Modules..."
 
         database_names = set()
@@ -84,13 +84,13 @@ def parse_module_definition(mod_info):
         for mod_def, mod_data in mod_info.items():
                 if mod_data:
                         print mod_def, ":",  len(mod_data)-5, "databases."
-                        run_module(mod_def,mod_data[0],mod_data[5:],mod_data[2],mod_data[3],mod_data[4])
+                        run_module(mod_def,mod_data[0],mod_data[5:],mod_data[2],mod_data[3],mod_data[4], cursor=cursor)
                         print
                 else:
                         print mod_def, ": Module not supported for version of data provided."
                         print           
 
-def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_query):
+def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_query, cursor=None):
         
         for db in database_names:
                 print "\tExecuting module on: " + db
@@ -166,9 +166,9 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
                                                 
                                 elif args.o == 'sql':
                                         key = col_row[key_timestamp]
-                                        cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
+                                        cursor.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
 
-                except:
+                except Exception as e:
                         print "\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data (ie: cache_encryptedB.db)."        
 
 def writeicsv():
@@ -209,26 +209,26 @@ def writecsv(filename):
 def writesql(filename):
         if os.path.isfile(filename):
                 os.remove(filename)
-                connw = sqlite3.connect(filename)
-                cw = connw.cursor()
-                cw.execute("CREATE TABLE APOLLO(Key timestamp, Activity TEXT, Output TEXT, Database TEXT, Module TEXT)")
-                
-                mod_info = {}
+        connw = sqlite3.connect(filename)
+        cw = connw.cursor()
+        cw.execute("CREATE TABLE APOLLO(Key timestamp, Activity TEXT, Output TEXT, Database TEXT, Module TEXT)")
+        
+        mod_info = {}
 
-                for root, dirs, filenames in os.walk(mod_dir):
-                        for f in filenames: 
-                                if f.endswith(".txt"):
-                                        mod_def = os.path.join(root,f) 
-                                        fread = open(mod_def,'r')
-                                        contents = fread.read()
-                                        if "[Database Metadata]" in contents:
-                                                mod_info[mod_def] = []
+        for root, dirs, filenames in os.walk(mod_dir):
+                for f in filenames: 
+                        if f.endswith(".txt"):
+                                mod_def = os.path.join(root,f) 
+                                fread = open(mod_def,'r')
+                                contents = fread.read()
+                                if "[Database Metadata]" in contents:
+                                        mod_info[mod_def] = []
 
-                parse_module_definition(mod_info)
+        parse_module_definition(mod_info, cursor=cw)
 
-                connw.commit()
+        connw.commit()
 
-                print("\n===> Lazily outputted to SQLite file: %s\n"%filename)
+        print("\n===> Lazily outputted to SQLite file: %s\n"%filename)
 
 if __name__ == "__main__":
 
@@ -243,7 +243,7 @@ if __name__ == "__main__":
         \n\tAdded Efficiency: Sam Alptekin of @sjc_CyberCrimes"
                 , prog='apollo.py'
                 , formatter_class=RawTextHelpFormatter)
-        parser.add_argument('-o', choices=['sql','csv', 'icsv'], required=True, action="store", help="Output: sql=SQLite, csv=CSV (required), icsv=CSV file per module")
+        parser.add_argument('-o', choices=['sql','csv', 'icsv'], required=True, action="store", help="Output: sql=SQLite, csv=CSV, icsv=CSV file per module (required)")
         parser.add_argument('-p', choices=['ios','mac','yolo'], required=True, action="store", help="Platform: ios=iOS [supported] or mac=macOS [not yet supported] (required).")
         parser.add_argument('-v', choices=['8','9','10','11','12','yolo'], required=True, action="store",help="Version of OS (required).")
         parser.add_argument('modules_directory',help="Path to Module Directory")
