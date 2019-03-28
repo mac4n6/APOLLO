@@ -35,10 +35,13 @@ from collections import OrderedDict
 import string
 
 # Version check
+py_version = 0
 if sys.version_info[0] == 2:
 	from ConfigParser import RawConfigParser
+	py_version = 2
 else:
 	from configparser import RawConfigParser
+	py_version = 3
 
 def parse_module_definition(mod_info):
 	print("Parsing Modules...")
@@ -120,10 +123,10 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 
 				data_stuff = ""
 
-				for k,v in col_row.iteritems():
+				for k,v in col_row.items():
 					if isinstance(v,str):
 						data = "[" + str(k) + ": " + str(v) + "] "
-					elif isinstance(v,unicode):
+					elif py_version == 2 and isinstance(v, unicode):
 						data = "[" + str(k) + ": " + v.encode('utf8').decode('utf8') + "] "
 					elif isinstance(v,int):
 						data = "[" + str(k) + ": " + str(v) + "] "
@@ -181,7 +184,7 @@ if __name__ == "__main__":
 	
 	if args.o == 'csv':
 
-		with open('apollo.csv', 'wb') as csvfile:
+		with open('apollo.csv', 'w') as csvfile:
 			loccsv = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 			loccsv.writerow(['Timestamp','Activity', 'Output','Database','Module'])
 
