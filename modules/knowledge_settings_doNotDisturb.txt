@@ -1,26 +1,21 @@
 [Module Metadata]
 AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
-MODULE_NOTES=Carplay Connections
+MODULE_NOTES=Device in Do Not Disturb Mode
 
 [Database Metadata]
 DATABASE=knowledgeC.db
-PLATFORMS=IOS
-VERSIONS=11,12
+PLATFORM=IOS
+VERSIONS=12
 
 [Query Metadata]
-QUERY_NAME=knowledge_device_carplay_connected
-ACTIVITY=Device Status
-KEY_TIMESTAMP=ENTRY CREATION
+QUERY_NAME=knowledge_settings_doNotDisturb
+ACTIVITY=Device State
+KEY_TIMESTAMP=START
 
-[SQL Query 11,12]
+[SQL Query 12]
 QUERY=
    SELECT
-      CASE
-      ZOBJECT.ZVALUEINTEGER
-         WHEN '0' THEN 'CONNECTED' 
-         WHEN '1' THEN 'DISCONNECTED' 
-      END "CARPLAY CONNECTED",
-      (ZOBJECT.ZENDDATE - ZOBJECT.ZSTARTDATE) AS "USAGE IN SECONDS", 
+      (ZOBJECT.ZENDDATE - ZOBJECT.ZSTARTDATE) AS "USAGE IN SECONDS",  
       CASE ZOBJECT.ZSTARTDAYOFWEEK 
          WHEN "1" THEN "Sunday"
          WHEN "2" THEN "Monday"
@@ -29,12 +24,12 @@ QUERY=
          WHEN "5" THEN "Thursday"
          WHEN "6" THEN "Friday"
          WHEN "7" THEN "Saturday"
-      END "DAY OF WEEK", 
+      END "DAY OF WEEK",
       ZOBJECT.ZSECONDSFROMGMT/3600 AS "GMT OFFSET",
       DATETIME(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') as "START", 
       DATETIME(ZOBJECT.ZENDDATE+978307200,'UNIXEPOCH') as "END",
       DATETIME(ZOBJECT.ZCREATIONDATE+978307200,'UNIXEPOCH') as "ENTRY CREATION", 
-      ZOBJECT.Z_PK AS "ZOBJECT TABLE ID"
+      ZOBJECT.Z_PK AS "ZOBJECT TABLE ID" 
    FROM
       ZOBJECT 
       LEFT JOIN
@@ -44,4 +39,4 @@ QUERY=
          ZSOURCE 
          ON ZOBJECT.ZSOURCE = ZSOURCE.Z_PK 
    WHERE
-      ZSTREAMNAME is "/carplay/isConnected"
+      ZSTREAMNAME = "/settings/doNotDisturb" 

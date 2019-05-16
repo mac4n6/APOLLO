@@ -5,14 +5,14 @@ MODULE_NOTES=Network Usage Processes/Bundle IDs
 [Database Metadata]
 DATABASE=netusage.sqlite
 PLATFORMS=IOS
-VERSIONS=8,9,10,11
+VERSIONS=8,9,10,11,12
 
 [Query Metadata]
 QUERY_NAME=netusage_zprocess
 ACTIVITY=Network Usage
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query 8,9,10,11]
+[SQL Query 8,9,10,11,12]
 QUERY=
 	SELECT
 		DATETIME(ZPROCESS.ZTIMESTAMP+ 978307200, 'unixepoch') AS "TIMESTAMP",

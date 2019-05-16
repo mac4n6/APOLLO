@@ -5,14 +5,14 @@ MODULE_NOTES=Is the device is plugged in or not.
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORMS=IOS
-VERSIONS=11
+VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_device_pluggedin
 ACTIVITY=Device Status
 KEY_TIMESTAMP=START
 
-[SQL Query 11]
+[SQL Query 11,12]
 QUERY=
    SELECT
       CASE

@@ -5,14 +5,14 @@ MODULE_NOTES=What is currently playing in various audio apps.
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORMS=IOS
-VERSIONS=11
+VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_audio_media_nowplaying
 ACTIVITY=Application Activity
 KEY_TIMESTAMP=ENTRY CREATION
 
-[SQL Query 11]
+[SQL Query 11,12]
 QUERY=
    SELECT
       ZOBJECT.ZVALUESTRING AS "BUNDLE ID", 

@@ -5,14 +5,14 @@ MODULE_NOTES=Application Usage, shows application in focus on device.
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORM=IOS
-VERSIONS=11
+VERSIONS=11,12
 
 [Query Metadata]
-QUERY_NAME= knowledge_app_inFocus
+QUERY_NAME=knowledge_app_inFocus
 ACTIVITY=Application In Focus
 KEY_TIMESTAMP=START
 
-[SQL Query 11]
+[SQL Query 11,12]
 QUERY=
 	SELECT
 		ZOBJECT.ZVALUESTRING AS "BUNDLE ID", 

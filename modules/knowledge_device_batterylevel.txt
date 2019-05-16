@@ -5,14 +5,14 @@ MODULE_NOTES=Device battery level percentage.
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORMS=IOS
-VERSIONS=11
+VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_device_batterylevel
 ACTIVITY=Device Status
 KEY_TIMESTAMP=ENTRY CREATION
 
-[SQL Query 11]
+[SQL Query 11,12]
 QUERY=
    SELECT
       ZOBJECT.ZVALUEDOUBLE as "BATTERY LEVEL",

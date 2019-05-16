@@ -5,14 +5,14 @@ MODULE_NOTES=Audio Bluetooth Connections
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORMS=IOS
-VERSIONS=11
+VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_audio_bluetooth_connected
 ACTIVITY=Device Status
 KEY_TIMESTAMP=ENTRY CREATION
 
-[SQL Query 11]
+[SQL Query 11,12]
 QUERY=
    SELECT
       ZSTRUCTUREDMETADATA.Z_DKBLUETOOTHMETADATAKEY__ADDRESS AS "BLUETOOTH ADDRESS", 

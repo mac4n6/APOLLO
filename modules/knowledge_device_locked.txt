@@ -5,14 +5,14 @@ MODULE_NOTES=Is the deviced locked or unlocked.
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORMS=IOS
-VERSIONS=11
+VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_device_locked
 ACTIVITY=Device Status
 KEY_TIMESTAMP=START
 
-[SQL Query 11]
+[SQL Query 11,12]
 QUERY=
    SELECT
       CASE ZOBJECT.ZVALUEINTEGER

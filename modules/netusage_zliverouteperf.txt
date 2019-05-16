@@ -5,14 +5,14 @@ MODULE_NOTES=Network Usage Traffic by Network.
 [Database Metadata]
 DATABASE=netusage.sqlite
 PLATFORMS=IOS
-VERSIONS=8,9,10,11
+VERSIONS=8,9,10,11,12
 
 [Query Metadata]
 QUERY_NAME=netusage_zliverouteperf
 ACTIVITY=Network Usage
 KEY_TIMESTAMP=LIVEROUTEPREF TIMESTAMP
 
-[SQL Query 11]
+[SQL Query 11,12]
 QUERY=
     SELECT
         DATETIME(ZLIVEROUTEPERF.ZTIMESTAMP + 978307200, 'unixepoch') AS "LIVEROUTEPREF TIMESTAMP",

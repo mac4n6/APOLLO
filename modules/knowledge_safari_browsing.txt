@@ -5,14 +5,14 @@ MODULE_NOTES=Safari browsing stored in the knowledgeC.db database
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORMS=IOS
-VERSIONS=11
+VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_safari_browsing
 ACTIVITY=Safari Browsing
 KEY_TIMESTAMP=ENTRY CREATION
 
-[SQL Query 11]
+[SQL Query 11,12]
 QUERY=
    SELECT
       ZOBJECT.ZVALUESTRING AS "URL", 
