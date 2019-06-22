@@ -5,14 +5,14 @@ MODULE_NOTES=Locationd Wi-Fi Location
 [Database Metadata]
 DATABASE=cache_encryptedB.db,cache_encryptedA.db,lockCache_encryptedA.db
 PLATFORMS=IOS
-VERSIONS=8,9,10,11
+VERSIONS=8,9,10,11,12
 
 [Query Metadata]
 QUERY_NAME=locationd_wifilocation
 ACTIVITY=LOCATION
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query 8,9,10,11]
+[SQL Query 8,9,10,11,12]
 QUERY=
 	SELECT
 		LATITUDE || ", " || LONGITUDE AS "COORDINATES",
