@@ -15,6 +15,7 @@
 ## Output Options (-o)
 * csv - CSV
 * sql - SQLite Database
+* icsv - Individual CSV files for each SQL query
 
 ## Platform Options (-p)
 * iOS
