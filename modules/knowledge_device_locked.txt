@@ -9,7 +9,7 @@ VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_device_locked
-ACTIVITY=Device Status
+ACTIVITY=Device Lock Status
 KEY_TIMESTAMP=START
 
 [SQL Query 11,12]

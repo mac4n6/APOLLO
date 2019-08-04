@@ -9,7 +9,7 @@ VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_app_calendar_activity
-ACTIVITY=Application Activity
+ACTIVITY=Calendar Activity
 KEY_TIMESTAMP=ENTRY CREATION
 
 [SQL Query 11,12]

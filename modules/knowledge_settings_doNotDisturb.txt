@@ -9,7 +9,7 @@ VERSIONS=12
 
 [Query Metadata]
 QUERY_NAME=knowledge_settings_doNotDisturb
-ACTIVITY=Device State
+ACTIVITY=Device DND State
 KEY_TIMESTAMP=START
 
 [SQL Query 12]

@@ -9,7 +9,7 @@ VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_device_batterylevel
-ACTIVITY=Device Status
+ACTIVITY=Battery Level
 KEY_TIMESTAMP=ENTRY CREATION
 
 [SQL Query 11,12]

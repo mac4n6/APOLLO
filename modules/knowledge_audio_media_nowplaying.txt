@@ -9,7 +9,7 @@ VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_audio_media_nowplaying
-ACTIVITY=Application Activity
+ACTIVITY=Now Playing
 KEY_TIMESTAMP=ENTRY CREATION
 
 [SQL Query 11,12]

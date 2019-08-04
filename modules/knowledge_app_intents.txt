@@ -9,7 +9,7 @@ VERSIONS=11,12
 
 [Query Metadata]
 QUERY_NAME=knowledge_app_intents
-ACTIVITY=Application Activity
+ACTIVITY=Application Intents
 KEY_TIMESTAMP=ENTRY CREATION
 
 [SQL Query 11,12]
