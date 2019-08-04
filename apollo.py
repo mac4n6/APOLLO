@@ -36,42 +36,64 @@ from collections import OrderedDict
 import string
 
 def parse_module_definition(mod_info):
-	print "Parsing Modules..."
 
 	database_names = set()
-	for mod_def, mod_data in mod_info.items():
-		mod_name = mod_def
-		parser = RawConfigParser()
-		parser.read(mod_def)
 
-		query_name = parser.get('Query Metadata', 'QUERY_NAME')
-		database_name = parser.get('Database Metadata', 'DATABASE').split(',')
-		activity = parser.get('Query Metadata', 'ACTIVITY')
-		key_timestamp = parser.get('Query Metadata', 'KEY_TIMESTAMP')
+	for root, dirs, filenames in os.walk(mod_dir):
+		for f in filenames: 
+			if f.endswith(".txt"):
+				mod_def = os.path.join(root,f) 
+				fread = open(mod_def,'r')
+				contents = fread.read()
 
-		for database in database_name:
-			database_names.add(database)
+				parser = RawConfigParser()
+				parser.read(mod_def)
 
-		if version == 'yolo':
-			for section in parser.sections():
-				try:
-					if "SQL Query" in section:
-						sql_query = parser.get(section,'QUERY')
-						mod_info[mod_def] = [query_name, database, activity, key_timestamp, sql_query]
-				except:
-					pass
-		else:			
-			for section in parser.sections():
-				try:
-					if version in section:
-						sql_query = parser.get(section,'QUERY')
-						mod_info[mod_def] = [query_name, database, activity, key_timestamp, sql_query]
-				except:
-					pass
+				mod_name = mod_def
+				query_name = parser.get('Query Metadata', 'QUERY_NAME')
+				database_name = parser.get('Database Metadata', 'DATABASE').split(',')
+				activity = parser.get('Query Metadata', 'ACTIVITY')
+				key_timestamp = parser.get('Query Metadata', 'KEY_TIMESTAMP')
 
-	print "Parsing: ", len(mod_info), " modules."
+				for database in database_name:
+					database_names.add(database)
 
-	print "Searching for database files..."
+				for db in database_name:
+					uniquekey = mod_def + "#" + db
+					mod_info[uniquekey] = []
+
+				if version == 'yolo':
+					for section in parser.sections():
+						try:
+							if "SQL Query" in section:
+								sql_query = parser.get(section,'QUERY')
+								mod_info[uniquekey] = [query_name, db, activity, key_timestamp, sql_query]
+						except:
+							pass
+				else:			
+					for section in parser.sections():
+						try:
+							if version in section:
+								sql_query = parser.get(section,'QUERY')
+								mod_info[uniquekey] = [query_name, db, activity, key_timestamp, sql_query]
+						except:
+							pass
+
+	print "\n==> Parsing", len(mod_info), "modules (Note: Some modules may be run on more than one database.)"
+
+	count = 1
+	modules = set()
+
+	for item in sorted(mod_info):
+			dbs = item.split('#')
+			for mod in dbs:
+				modules.add(dbs[0])
+			print "\t[" + str(count) + "] " + str(dbs[0]) + " on " + str(dbs[1])
+			count = count + 1
+
+	print "\n==> Will lazily run APOLLO on " + str(len(modules)) + " unique modules and " + str(len(database_names))+ " unique databases." 
+
+	print "\n==> Searching for database files...this may take a hot minute..."
 	print
 	for root, dirs, filenames in os.walk(data_dir):
 		for f in filenames:
@@ -82,15 +104,18 @@ def parse_module_definition(mod_info):
 							mod_info[mod_def].append(os.path.join(root,f))
 
 	for mod_def, mod_data in mod_info.items():
+		mod_def_split = mod_def.split('#')
 		if mod_data:
-			print mod_def, ":",  len(mod_data)-5, "databases."
+			print mod_def_split[0] + " on " + mod_def_split[1], ":",  len(mod_data)-5, "databases."
 			run_module(mod_def,mod_data[0],mod_data[5:],mod_data[2],mod_data[3],mod_data[4])
 			print
 		else:
-			print mod_def, ": Module not supported for version of data provided."
-			print		
+			print mod_def_split[0] + " on " + mod_def_split[1], ": Module not supported for version of data provided."
+			print	
 
 def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_query):
+
+	global records
 
 	for db in database_names:
 		print "\tExecuting module on: " + db
@@ -103,7 +128,10 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 			sql = sql_query
 			cur.execute(sql)
 			rows = cur.fetchall()
-			print "\t\tNumber of Records: " + str(len(rows))
+			num_records = str(len(rows))
+
+			print "\t\tNumber of Records: " + num_records
+			records = records + len(rows)
 
 			headers = []
 			for x in cur.description:
@@ -122,6 +150,8 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 						data = "[" + str(k) + ": " + v.encode('utf8').decode('utf8') + "] "
 					elif isinstance(v,int):
 						data = "[" + str(k) + ": " + str(v) + "] "
+					elif isinstance(v,buffer):
+						data = "[" + str(k) + ": " + str(v).decode('utf8') + "] "
 					else:
 						data = "[" + str(k) + ": " + str(v) + "] "
 
@@ -140,7 +170,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 					key = col_row[key_timestamp]
 					cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
 		except:
-			print "\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data (ie: cache_encryptedB.db)."	
+			print "\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data (ie: cache_encryptedB.db). Try using chown/chmod to change permissions/ownership."
 
 if __name__ == "__main__":
 
@@ -149,8 +179,8 @@ if __name__ == "__main__":
 	\n\nVery lazy parser to extract pattern-of-life data from SQLite databases on iOS/macOS datasets (though really any SQLite database if you make a configuration file and provide it the proper metadata details.\
 	\n\nOutputs include SQLite Database or CSV.\
 	\n\nYolo! Meant to run on anything and everything, like a honey badger - it don't care. Can be used with multiple dumps of devices. It will run all queries in all modules with no regard for versioning. May lead to redundant data since it can run more than one similar query. Be careful with this option.\
-	\n\n\tVersion: BETA 01172019 - TESTING PURPOSES ONLY, SERIOUSLY.\
-	\n\tUpdated: 01/17/2019\
+	\n\n\tVersion: BETA 08042019 - TESTING PURPOSES ONLY, SERIOUSLY.\
+	\n\tUpdated: 08/04/2019\
 	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com\
 	\n\tAdded Efficiency: Sam Alptekin of @sjc_CyberCrimes"
 		, prog='apollo.py'
@@ -168,11 +198,21 @@ if __name__ == "__main__":
 
 	global csvfile
 	global loccsv
+	records = 0
 
 	mod_dir = args.modules_directory
 	data_dir = args.data_dir_to_analyze
 	platform = args.p
 	version = args.v
+
+	print "\n--------------------------------------------------------------------------------------"
+	print "Platform: " + platform
+	print "Version: " + version
+	print "Data Directory: " + data_dir
+	print "Modules Directory: " + mod_dir	
+	print "--------------------------------------------------------------------------------------"
+
+	mod_info = {}
 	
 	if args.o == 'csv':
 
@@ -180,19 +220,9 @@ if __name__ == "__main__":
 			loccsv = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 			loccsv.writerow(['Timestamp','Activity', 'Output','Database','Module'])
 
-			mod_info = {}
-
-			for root, dirs, filenames in os.walk(mod_dir):
-				for f in filenames: 
-					if f.endswith(".txt"):
-						mod_def = os.path.join(root,f) 
-						fread = open(mod_def,'r')
-						contents = fread.read()
-						if "[Database Metadata]" in contents:
-							mod_info[mod_def] = []
-
 			parse_module_definition(mod_info)
 
+			print "\n===> Total number of records: " + str(records)
 			print "\n===> Lazily outputted to CSV file: apollo.csv\n"
 
 	if args.o == 'sql':
@@ -202,19 +232,9 @@ if __name__ == "__main__":
 		connw = sqlite3.connect('apollo.db')
 		cw = connw.cursor()
 		cw.execute("CREATE TABLE APOLLO(Key timestamp, Activity TEXT, Output TEXT, Database TEXT, Module TEXT)")
-		
-		mod_info = {}
-
-		for root, dirs, filenames in os.walk(mod_dir):
-			for f in filenames: 
-				if f.endswith(".txt"):
-					mod_def = os.path.join(root,f) 
-					fread = open(mod_def,'r')
-					contents = fread.read()
-					if "[Database Metadata]" in contents:
-						mod_info[mod_def] = []
 
 		parse_module_definition(mod_info)
+		print "\n===> Total number of records: " + str(records)
 
 		connw.commit()
 
