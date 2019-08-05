@@ -13,8 +13,8 @@
 `python apollo.py -o {csv, sql} -p {ios, mac, yolo} -v {8,9,10,11,12,yolo} <modules directory> <data directory>`
 
 ## Output Options (-o)
-* csv - CSV
-* sql - SQLite Database
+* `csv` - CSV
+* `sql` - SQLite Database
 
 ## Platform Options (-p)
 * `ios`
