@@ -18,7 +18,7 @@
 
 ## Platform Options (-p)
 * iOS
-* Mac
+* Mac [Offical support coming soon!]
 * Yolo - Just parse whatever.
 
 ## Version Options (-v)
