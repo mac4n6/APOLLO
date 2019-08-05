@@ -25,6 +25,10 @@
 * iOS 8, 9, 10, 11, 12
 * Yolo - Just parse whatever.
 
+## Getting Errors? Try This (Windows users, use eqivlent commands)
+* Check database permissions - Use chmod to give some databases with "all blank" permissions some sort of permission. (Happens with many types of physical-logical extractions.)
+* Check database ownership - Use chown to take ownership of the files.
+
 ## Data Directory Pro Tip
 * ~~Extract databases as it will take forever (1hr+) to run on full disk dump, it works, but be patient.~~
 * Not anymore, thanks to Sam Alptekin of @sjc_CyberCrimes 👍
