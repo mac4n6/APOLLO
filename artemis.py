@@ -5,7 +5,8 @@ import xml.etree.ElementTree as ET
 import glob, os, sqlite3, os, sys, re, json, subprocess
 
 parser = argparse.ArgumentParser(description="\
-	Artemis Test"
+	Android Review Timeline Events Module Integrated Solution\
+	\n\n Process UsageStats Android XML files for Apollo.py ingestion."
 , prog='artemis.py'
 , formatter_class=RawTextHelpFormatter)
 parser.add_argument('-o', choices=['sql','csv'], required=True, action="store", help="Output: sql=SQLite or csv=CSV (required)")
