@@ -220,7 +220,7 @@ if __name__ == "__main__":
 	
 	if args.o == 'csv':
 
-		with open('apollo.csv', 'wb') as csvfile:
+		with open('apollo.csv', 'w') as csvfile:
 			loccsv = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 			loccsv.writerow(['Timestamp','Activity', 'Output','Database','Module'])
 
