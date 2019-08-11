@@ -32,7 +32,7 @@
 
 ## Thank You!
 * Thanks to Sam Alptekin of @sjc_CyberCrimes, script is much, much faster than original.
-* Thanks to @AlexisBrignoni for Python 3 support!
+* Thanks to @AlexisBrignoni for Python 3 support and ARTEMIS!
 
 ## References
 * [Knowledge is Power! Using the macOS/iOS knowledgeC.db Database to Determine Precise User and Application Usage](https://www.mac4n6.com/blog/2018/8/5/knowledge-is-power-using-the-knowledgecdb-database-on-macos-and-ios-to-determine-precise-user-and-application-usage)
