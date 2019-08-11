@@ -1,0 +1,34 @@
+[Module Metadata]
+AUTHOR=AlexisBrignoni/abrignoni.com/@alexisbrignoni
+MODULE_NOTES=Android UsageStats
+
+[Database Metadata]
+DATABASE=usagestats.db
+PLATFORMS=yolo
+VERSIONS=yolo
+
+[Query Metadata]
+QUERY_NAME=android_usagestas
+ACTIVITY=app+configActivity
+KEY_TIMESTAMP=START
+
+[SQL Query yolo]
+QUERY=
+	SELECT  
+		usage_type,
+		package,
+		classs,
+		lastime AS "START",
+		timeactive AS "ACTIVE IN MSECS",
+		timeactive/1000 AS "ACTIVE IN SECS",
+		CASE types
+			WHEN '1' THEN 'MOVE_TO_FOREGROUND'
+			WHEN '2' THEN 'MOVE_TO_BACKGROUND'
+			WHEN '5' THEN 'CONFIGURATION_CHANGE'
+			WHEN '7' THEN 'USER_INTERACTION'
+			WHEN '8' THEN 'SHORTCUT_INVOCATION'
+		ELSE types
+		END types,
+		source
+	FROM data
+	WHERE package is not ""

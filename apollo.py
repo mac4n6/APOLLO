@@ -24,6 +24,8 @@ ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
 SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 '''
 
+from __future__ import absolute_import
+from __future__ import print_function
 import sqlite3
 from time import gmtime, localtime, strftime
 import csv
@@ -31,9 +33,11 @@ import sys
 import argparse
 from argparse import RawTextHelpFormatter
 import os
-from ConfigParser import RawConfigParser
+from six.moves.configparser import RawConfigParser
 from collections import OrderedDict
 import string
+import six
+from six.moves import zip
 
 def parse_module_definition(mod_info):
 
@@ -79,7 +83,7 @@ def parse_module_definition(mod_info):
 						except:
 							pass
 
-	print "\n==> Parsing", len(mod_info), "modules (Note: Some modules may be run on more than one database.)"
+	print("\n==> Parsing", len(mod_info), "modules (Note: Some modules may be run on more than one database.)")
 
 	count = 1
 	modules = set()
@@ -88,13 +92,13 @@ def parse_module_definition(mod_info):
 			dbs = item.split('#')
 			for mod in dbs:
 				modules.add(dbs[0])
-			print "\t[" + str(count) + "] " + str(dbs[0]) + " on " + str(dbs[1])
+			print("\t[" + str(count) + "] " + str(dbs[0]) + " on " + str(dbs[1]))
 			count = count + 1
 
-	print "\n==> Will lazily run APOLLO on " + str(len(modules)) + " unique modules and " + str(len(database_names))+ " unique databases." 
+	print("\n==> Will lazily run APOLLO on " + str(len(modules)) + " unique modules and " + str(len(database_names))+ " unique databases.") 
 
-	print "\n==> Searching for database files...this may take a hot minute..."
-	print
+	print("\n==> Searching for database files...this may take a hot minute...")
+	print()
 	for root, dirs, filenames in os.walk(data_dir):
 		for f in filenames:
 			if f in database_names:
@@ -106,19 +110,19 @@ def parse_module_definition(mod_info):
 	for mod_def, mod_data in mod_info.items():
 		mod_def_split = mod_def.split('#')
 		if mod_data:
-			print mod_def_split[0] + " on " + mod_def_split[1], ":",  len(mod_data)-5, "databases."
+			print(mod_def_split[0] + " on " + mod_def_split[1], ":",  len(mod_data)-5, "databases.")
 			run_module(mod_def,mod_data[0],mod_data[5:],mod_data[2],mod_data[3],mod_data[4])
-			print
+			print()
 		else:
-			print mod_def_split[0] + " on " + mod_def_split[1], ": Module not supported for version of data provided."
-			print	
+			print(mod_def_split[0] + " on " + mod_def_split[1], ": Module not supported for version of data provided.")
+			print()	
 
 def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_query):
 
 	global records
 
 	for db in database_names:
-		print "\tExecuting module on: " + db
+		print("\tExecuting module on: " + db)
 		conn = sqlite3.connect(db)
 		with conn:
 			conn.row_factory = sqlite3.Row
@@ -130,7 +134,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 			rows = cur.fetchall()
 			num_records = str(len(rows))
 
-			print "\t\tNumber of Records: " + num_records
+			print("\t\tNumber of Records: " + num_records)
 			records = records + len(rows)
 
 			headers = []
@@ -139,14 +143,14 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 
 			for row in rows:
 				col_row = OrderedDict()
-				col_row = (OrderedDict(zip(headers,row)))
+				col_row = (OrderedDict(list(zip(headers,row))))
 
 				data_stuff = ""
 
-				for k,v in col_row.iteritems():
+				for k,v in six.iteritems(col_row):
 					if isinstance(v,str):
 						data = "[" + str(k) + ": " + str(v) + "] "
-					elif isinstance(v,unicode):
+					elif isinstance(v,six.text_type):
 						data = "[" + str(k) + ": " + v.encode('utf8').decode('utf8') + "] "
 					elif isinstance(v,int):
 						data = "[" + str(k) + ": " + str(v) + "] "
@@ -158,7 +162,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 					try:
 						data_stuff = data_stuff + data
 					except:
-						data_stuff = filter(lambda x: x in string.printable, data_stuff)
+						data_stuff = [x for x in data_stuff if x in string.printable]
 						data_stuff = data_stuff + data
 
 				if args.o == 'csv':
@@ -170,7 +174,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 					key = col_row[key_timestamp]
 					cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
 		except:
-			print "\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data (ie: cache_encryptedB.db). Try using chown/chmod to change permissions/ownership."
+			print("\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data (ie: cache_encryptedB.db). Try using chown/chmod to change permissions/ownership.")
 
 if __name__ == "__main__":
 
@@ -205,25 +209,25 @@ if __name__ == "__main__":
 	platform = args.p
 	version = args.v
 
-	print "\n--------------------------------------------------------------------------------------"
-	print "Platform: " + platform
-	print "Version: " + version
-	print "Data Directory: " + data_dir
-	print "Modules Directory: " + mod_dir	
-	print "--------------------------------------------------------------------------------------"
+	print("\n--------------------------------------------------------------------------------------")
+	print("Platform: " + platform)
+	print("Version: " + version)
+	print("Data Directory: " + data_dir)
+	print("Modules Directory: " + mod_dir)	
+	print("--------------------------------------------------------------------------------------")
 
 	mod_info = {}
 	
 	if args.o == 'csv':
 
-		with open('apollo.csv', 'wb') as csvfile:
+		with open('apollo.csv', 'w') as csvfile:
 			loccsv = csv.writer(csvfile, delimiter=',', quotechar='|', quoting=csv.QUOTE_MINIMAL)
 			loccsv.writerow(['Timestamp','Activity', 'Output','Database','Module'])
 
 			parse_module_definition(mod_info)
 
-			print "\n===> Total number of records: " + str(records)
-			print "\n===> Lazily outputted to CSV file: apollo.csv\n"
+			print("\n===> Total number of records: " + str(records))
+			print("\n===> Lazily outputted to CSV file: apollo.csv\n")
 
 	if args.o == 'sql':
 
@@ -234,8 +238,8 @@ if __name__ == "__main__":
 		cw.execute("CREATE TABLE APOLLO(Key timestamp, Activity TEXT, Output TEXT, Database TEXT, Module TEXT)")
 
 		parse_module_definition(mod_info)
-		print "\n===> Total number of records: " + str(records)
+		print("\n===> Total number of records: " + str(records))
 
 		connw.commit()
 
-		print "\n===> Lazily outputted to SQLite file: apollo.db\n"
+		print("\n===> Lazily outputted to SQLite file: apollo.db\n")

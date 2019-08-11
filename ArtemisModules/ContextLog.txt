@@ -1,0 +1,23 @@
+[Module Metadata]
+AUTHOR=AlexisBrignoni/abrignoni.com/@alexisbrignoni
+MODULE_NOTES=Android Samsung Context Log
+
+[Database Metadata]
+DATABASE=ContextLog.db
+PLATFORMS=yolo
+VERSIONS=yolo
+
+[Query Metadata]
+QUERY_NAME=samsung_context_log
+ACTIVITY=appActivity
+KEY_TIMESTAMP=START
+
+[SQL Query yolo]
+QUERY=
+	SELECT  
+		app_id AS "APP ID", 
+		app_sub_id AS "APP SUB ID", 
+		duration AS "DURATION (IN MSECS)",
+		duration/1000 AS "DURATION (IN SECS)", 
+		starttime AS "START"
+	FROM use_app
