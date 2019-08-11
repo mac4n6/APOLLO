@@ -64,7 +64,7 @@ QUERY=
             SCREENSTATE_ID 
       )
 
-[SQL Query 11,12]
+[SQL Query 9,10]
 QUERY=
    SELECT
       DATETIME(SCREEN_STATE_TIMESTAMP + SYSTEM, 'unixepoch') AS ADJUSTED_TIMESTAMP,
