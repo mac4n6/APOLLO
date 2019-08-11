@@ -186,8 +186,8 @@ if __name__ == "__main__":
 	\n\n\tVersion: BETA 08112019 - TESTING PURPOSES ONLY, SERIOUSLY.\
 	\n\tUpdated: 08/11/2019\
 	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com\
-		, prog='apollo.py'
-		, formatter_class=RawTextHelpFormatter)
+		, prog='apollo.py'\
+		, formatter_class=RawTextHelpFormatter)"
 	parser.add_argument('-o', choices=['sql','csv'], required=True, action="store", help="Output: sql=SQLite or csv=CSV (required)")
 	parser.add_argument('-p', choices=['ios','mac','yolo'], required=True, action="store", help="Platform: ios=iOS [supported] or mac=macOS [not yet supported] (required).")
 	parser.add_argument('-v', choices=['8','9','10','11','12','yolo'], required=True, action="store",help="Version of OS (required).")
