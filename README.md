@@ -1,13 +1,14 @@
 # Apple Pattern of Life Lazy Output'er (APOLLO)
 * Originally presented as the first ever [Objective by the Sea](https://objectivebythesea.com/) - Mac Security Conference in 2018
 * Presentation Slides: [From Apple Seeds to Apple Pie](https://github.com/mac4n6/Presentations/tree/master/From%20Apple%20Seeds%20to%20Apple%20Pie)
+* Presentation Slides: [Launching APOLLO: Creating a Simple Tool for Advanced Forensic Analysis](https://github.com/mac4n6/Presentations/tree/master/LaunchingAPOLLO)
 
 # BETA - FOR TESTING PURPOSES ONLY
 * This is your warning. I've tested a few modules but there is much more testing to be done.
 * Find a bug or a better query, let me know!
 * Extra warning on PowerLog modules, timestamps may be in the past and/or future - testing these.
 * Many more modules to come!
-* Python 2.7, probably doesn't run on 3 without tweaking code.
+* Python 3 (omg, finally!)
 
 ## Usage
 `python apollo.py -o {csv, sql} -p {ios, mac, yolo} -v {8,9,10,11,12,yolo} <modules directory> <data directory>`
@@ -19,19 +20,19 @@
 ## Platform Options (-p)
 * `ios`
 * `mac` [Offical support coming soon!]
-* `yolo` - Just parse whatever.
+* `yolo` - Just parse whatever.  Use for ARTEMIS parsing.
 
 ## Version Options (-v)
 * iOS `8`, `9`, `10`, `11`, `12`
-* `yolo` - Just parse whatever.
+* `yolo` - Just parse whatever. Use for ARTEMIS parsing.
 
 ## Getting Errors? Try This (Windows users, use eqivlent commands)
 * Check database permissions - Use `chmod` to give some databases with "all blank" permissions some sort of permission. (Happens with many types of physical-logical extractions.)
 * Check database ownership - Use `chown` to take ownership of the files.
 
-## Data Directory Pro Tip
-* ~~Extract databases as it will take forever (1hr+) to run on full disk dump, it works, but be patient.~~
-* Not anymore, thanks to Sam Alptekin of @sjc_CyberCrimes 👍
+## Thank You!
+* Thanks to Sam Alptekin of @sjc_CyberCrimes, script is much, much faster than original.
+* Thanks to @AlexisBrignoni for Python 3 support!
 
 ## References
 * [Knowledge is Power! Using the macOS/iOS knowledgeC.db Database to Determine Precise User and Application Usage](https://www.mac4n6.com/blog/2018/8/5/knowledge-is-power-using-the-knowledgecdb-database-on-macos-and-ios-to-determine-precise-user-and-application-usage)
