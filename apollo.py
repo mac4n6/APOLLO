@@ -38,6 +38,9 @@ from collections import OrderedDict
 import string
 import six
 from six.moves import zip
+from simplekml import Kml, Style
+import re
+import random
 
 def parse_module_definition(mod_info):
 
@@ -120,15 +123,17 @@ def parse_module_definition(mod_info):
 def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_query):
 
 	global records
+	global total_loc_records
 
 	for db in database_names:
 		print("\tExecuting module on: " + db)
+
 		conn = sqlite3.connect(db)
 		with conn:
 			conn.row_factory = sqlite3.Row
 			cur = conn.cursor()
 
-		try:
+		try:	
 			sql = sql_query
 			cur.execute(sql)
 			rows = cur.fetchall()
@@ -141,38 +146,58 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 			for x in cur.description:
 				headers.append(x[0])
 
-			for row in rows:
-				col_row = OrderedDict()
-				col_row = (OrderedDict(list(zip(headers,row))))
+			loc_records = 0
 
-				data_stuff = ""
+			if args.k == True and activity == "Location":
+				kml = Kml()
+				sharedstyle = Style()
+				iconcolor = "%06x" % random.randint(0, 0xFFFFFF)
+				sharedstyle.iconstyle.color =  'ff0000ff'
 
-				for k,v in six.iteritems(col_row):
-					if isinstance(v,str):
+				for row in rows:
+					col_row = OrderedDict()
+					col_row = (OrderedDict(list(zip(headers,row))))
+
+					data_stuff = ""
+
+					for k,v in six.iteritems(col_row):
+			
 						data = "[" + str(k) + ": " + str(v) + "] "
-					elif isinstance(v,six.text_type):
-						data = "[" + str(k) + ": " + v.encode('utf8').decode('utf8') + "] "
-					elif isinstance(v,int):
-						data = "[" + str(k) + ": " + str(v) + "] "
-					elif isinstance(v,buffer):
-						data = "[" + str(k) + ": " + str(v).decode('utf8') + "] "
-					else:
-						data = "[" + str(k) + ": " + str(v) + "] "
 
-					try:
-						data_stuff = data_stuff + data
-					except:
-						data_stuff = [x for x in data_stuff if x in string.printable]
-						data_stuff = data_stuff + data
+						try:
+							data_stuff = data_stuff + data
+						except:
+							data_stuff = [x for x in data_stuff if x in string.printable]
+							data_stuff = data_stuff + data
 
-				if args.o == 'csv':
-					try:
-						loccsv.writerow([col_row[key_timestamp],activity, data_stuff,db,mod_name])
-					except:
-						loccsv.writerow([col_row[key_timestamp],activity, data_stuff.encode('utf8'),db,mod_name])
-				elif args.o == 'sql':
-					key = col_row[key_timestamp]
-					cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
+					if args.o == 'csv':
+						try:
+							loccsv.writerow([col_row[key_timestamp],activity, data_stuff,db,mod_name])
+						except:
+							loccsv.writerow([col_row[key_timestamp],activity, data_stuff.encode('utf8'),db,mod_name])
+					elif args.o == 'sql':
+						key = col_row[key_timestamp]
+						cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
+
+					if args.k == True and activity == "Location":
+						coords_search = re.search(r'COORDINATES: [\d\.\,\ \-]*',data_stuff)
+						coords = coords_search.group(0).split(" ")
+
+						point = kml.newpoint(name=key)
+						point.description = ("Data: " + data_stuff)
+						point.timestamp.when = key
+						point.style = sharedstyle
+						point.coords = [(coords[2],coords[1])]
+						
+						loc_records = loc_records + 1
+						total_loc_records = total_loc_records + 1
+
+				if args.k == True:
+					kmzfilename = query_name + ".kmz"
+					print("\t\tNumber of Location Records: " + str(loc_records))
+					print("\t\t===> Saving KMZ to " + kmzfilename + "...")
+					kml.savekmz(kmzfilename)	
+
 		except:
 			print("\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data (ie: cache_encryptedB.db). Try using chown/chmod to change permissions/ownership.")
 
@@ -183,8 +208,8 @@ if __name__ == "__main__":
 	\n\nVery lazy parser to extract pattern-of-life data from SQLite databases on iOS/macOS datasets (though really any SQLite database if you make a configuration file and provide it the proper metadata details.\
 	\n\nOutputs include SQLite Database or CSV.\
 	\n\nYolo! Meant to run on anything and everything, like a honey badger - it don't care. Can be used with multiple dumps of devices. It will run all queries in all modules with no regard for versioning. May lead to redundant data since it can run more than one similar query. Be careful with this option.\
-	\n\n\tVersion: BETA 08112019 - TESTING PURPOSES ONLY, SERIOUSLY.\
-	\n\tUpdated: 08/11/2019\
+	\n\n\tVersion: BETA 08212019 - TESTING PURPOSES ONLY, SERIOUSLY.\
+	\n\tUpdated: 08/21/2019\
 	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com"
 		, prog='apollo.py'
 		, formatter_class=RawTextHelpFormatter)
@@ -192,6 +217,7 @@ if __name__ == "__main__":
 	parser.add_argument('-p', choices=['ios','mac','yolo'], required=True, action="store", help="Platform: ios=iOS [supported] or mac=macOS [not yet supported] (required).")
 	parser.add_argument('-v', choices=['8','9','10','11','12','yolo'], required=True, action="store",help="Version of OS (required).")
 	parser.add_argument('modules_directory',help="Path to Module Directory")
+	parser.add_argument('-k',help="Additional KMZ Output for Location Data",action="store_true")
 	parser.add_argument('data_dir_to_analyze',help="Path to Data Directory. It can be full file system dump or directory of extracted databases, it is recursive.")
 
 	args = parser.parse_args()
@@ -202,6 +228,7 @@ if __name__ == "__main__":
 	global csvfile
 	global loccsv
 	records = 0
+	total_loc_records = 0
 
 	mod_dir = args.modules_directory
 	data_dir = args.data_dir_to_analyze
@@ -213,6 +240,8 @@ if __name__ == "__main__":
 	print("Version: " + version)
 	print("Data Directory: " + data_dir)
 	print("Modules Directory: " + mod_dir)	
+	if args.k:
+		print("KMZ: TRUE")
 	print("--------------------------------------------------------------------------------------")
 
 	mod_info = {}
@@ -226,6 +255,10 @@ if __name__ == "__main__":
 			parse_module_definition(mod_info)
 
 			print("\n===> Total number of records: " + str(records))
+
+			if args.k:
+				print("===> Total Number of Location Records: " + str(total_loc_records))
+
 			print("\n===> Lazily outputted to CSV file: apollo.csv\n")
 
 	if args.o == 'sql':
@@ -237,8 +270,13 @@ if __name__ == "__main__":
 		cw.execute("CREATE TABLE APOLLO(Key timestamp, Activity TEXT, Output TEXT, Database TEXT, Module TEXT)")
 
 		parse_module_definition(mod_info)
-		print("\n===> Total number of records: " + str(records))
+		print("\n===> Total Number of Records: " + str(records))
 
 		connw.commit()
 
+		if args.k:
+			print("===> Total Number of Location Records: " + str(total_loc_records))
+		
 		print("\n===> Lazily outputted to SQLite file: apollo.db\n")
+
+
