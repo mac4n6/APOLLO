@@ -10,6 +10,9 @@
 * Many more modules to come!
 * Python 3 (omg, finally!)
 
+## Dependencies
+* [SimpleKML](https://simplekml.readthedocs.io) - Copy the `simplekml` directory to the directory where apollo.py is being run from.
+
 ## Usage
 `python apollo.py -o {csv, sql} -p {ios, mac, yolo} -v {8,9,10,11,12,yolo} <modules directory> <data directory>`
 
