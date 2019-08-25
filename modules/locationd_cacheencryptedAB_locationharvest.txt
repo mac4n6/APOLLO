@@ -7,8 +7,8 @@ DATABASE=cache_encryptedB.db,cache_encryptedA.db
 VERSIONS=8,9,10
 
 [Query Metadata]
-QUERY_NAME=locationd_locationharvest
-ACTIVITY=LOCATION
+QUERY_NAME=locationd_cacheencryptedAB_locationharvest
+ACTIVITY=Location
 KEY_TIMESTAMP=TIMESTAMP
 
 [SQL Query 10]

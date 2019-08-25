@@ -8,8 +8,8 @@ PLATFORMS=IOS
 VERSIONS=10
 
 [Query Metadata]
-QUERY_NAME=locationd_poiharvestlocation
-ACTIVITY=LOCATION
+QUERY_NAME=locationd_cacheencryptedAB_poiharvestlocation
+ACTIVITY=Location
 KEY_TIMESTAMP=TIMESTAMP
 
 [SQL Query 10]

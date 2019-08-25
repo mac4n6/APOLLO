@@ -8,8 +8,8 @@ PLATFORMS=IOS
 VERSIONS=8,9,10
 
 [Query Metadata]
-QUERY_NAME=locationd_cmdacelllocationharvest
-ACTIVITY=LOCATION
+QUERY_NAME=locationd_cacheencryptedAB_cmdacelllocationharvest
+ACTIVITY=Location
 KEY_TIMESTAMP=TIMESTAMP
 
 [SQL Query 10]

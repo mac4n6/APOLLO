@@ -8,8 +8,8 @@ PLATFORMS=IOS
 VERSIONS=9,10,11,12
 
 [Query Metadata]
-QUERY_NAME=locationd_scdmacelllocation
-ACTIVITY=LOCATION
+QUERY_NAME=locationd_cacheencryptedAB_scdmacelllocation
+ACTIVITY=Location
 KEY_TIMESTAMP=TIMESTAMP
 
 [SQL Query 9,10,11,12]

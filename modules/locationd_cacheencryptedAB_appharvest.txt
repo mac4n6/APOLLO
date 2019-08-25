@@ -8,8 +8,8 @@ PLATFORMS=IOS
 VERSIONS=8,9,10
 
 [Query Metadata]
-QUERY_NAME=locationd_appharvest
-ACTIVITY=LOCATION
+QUERY_NAME=locationd_cacheencryptedAB_appharvest
+ACTIVITY=Location
 KEY_TIMESTAMP=TIMESTAMP
 
 [SQL Query 8,9,10]
