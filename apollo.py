@@ -159,8 +159,11 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 				data_stuff = ""
 
 				for k,v in six.iteritems(col_row):
-		
-					data = "[" + str(k) + ": " + str(v) + "] "
+					# changed due to errors popping up when v contains non-ascii characters (e.g. euro symbol)
+					try:
+						data = "[" + str(k) + ": " + str(v.encode('ascii', 'ignore')) + "] "
+					except AttributeError:
+						data = "[" + str(k) + ": " + 'None' + "] "
 
 					try:
 						data_stuff = data_stuff + data
