@@ -18,7 +18,7 @@ QUERY=
 		usage_type,
 		package,
 		classs,
-		lastime AS "START",
+		datetime(lastime/1000, 'UNIXEPOCH', 'localtime') AS "START",
 		timeactive AS "ACTIVE IN MSECS",
 		timeactive/1000 AS "ACTIVE IN SECS",
 		CASE types
