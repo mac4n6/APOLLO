@@ -62,7 +62,6 @@ def parse_usagestat():
 			for f in dirs:
 				if f == "usagestats":
 					pathfound = os.path.join(root, f)
-					print(pathfound)
 
 	if pathfound == 0:
 		print("No UsageStats XML directory located")
@@ -502,22 +501,21 @@ def parse_mobile_installation_logs():
 	print ('Logs processed: ', filescounter)
 	print ('Lines processed: ', counter)
 
-#create function to pass processing to apollo
-
-
 
 if platform == "android":
 	parse_usagestat()
-	
-if platform == "ios":
-	parse_mobile_installation_logs()
-	
-if platform == "yolo":
+	platform = "yolo"
+	version = "yolo"
+elif platform == "ios":
+	parse_mobile_installation_logs()	
+elif platform == "yolo":
 	parse_usagestat()
 	parse_mobile_installation_logs()
+	version = "yolo"
 	
 print("--------------------------------------------------------------------------------------")
 print("Calling Apollo for database processing...")
 print("Artemis is done. Good bye")
-#Poner un try si apollo no esta para que de un error
+
+
 p = subprocess.run(['python', 'apollo.py', '-o', format, '-p', platform, '-v', version, mod_dir, data_dir])
