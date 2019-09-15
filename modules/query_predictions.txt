@@ -1,0 +1,24 @@
+[Module Metadata]
+AUTHOR=AlexisBrignoni/abrignoni.com/@alexisbrignoni
+MODULE_NOTES=Query_predictions.db
+
+[Database Metadata]
+DATABASE=query_predictions.db
+PLATFORMS=ios,yolo
+VERSIONS=8,9,10,11,12,yolo
+
+[Query Metadata]
+QUERY_NAME=query_predictions.db
+ACTIVITY=Chat
+KEY_TIMESTAMP=START
+
+[SQL Query 8,9,10,11,12,yolo]
+QUERY=
+	select 
+		content,
+		isSent,
+		conversationId,
+		id,
+		uuid,
+		datetime(creationTimestamp, "UNIXEPOCH", "LOCALTIME") as START
+		from messages
