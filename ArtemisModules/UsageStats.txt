@@ -15,12 +15,15 @@ KEY_TIMESTAMP=START
 [SQL Query yolo]
 QUERY=
 	SELECT  
-		usage_type,
-		package,
-		classs,
+		usage_type as "USAGE TYPE",
+		package as "PACKAGE",
+		classs as "CLASS",
 		datetime(lastime/1000, 'UNIXEPOCH', 'localtime') AS "START",
-		timeactive AS "ACTIVE IN MSECS",
-		timeactive/1000 AS "ACTIVE IN SECS",
+		CASE timeactive 
+			WHEN timeactive = 0 then '0'
+			WHEN timeactive =" " then ' '
+			ELSE timeactive 
+		END "ACTIVE IN MSECS",
 		CASE types
 			WHEN '1' THEN 'MOVE_TO_FOREGROUND'
 			WHEN '2' THEN 'MOVE_TO_BACKGROUND'
@@ -28,7 +31,7 @@ QUERY=
 			WHEN '7' THEN 'USER_INTERACTION'
 			WHEN '8' THEN 'SHORTCUT_INVOCATION'
 		ELSE types
-		END types,
-		source
+		END "TYPES",
+		source as "SOURCE"
 	FROM data
 	WHERE package is not ""

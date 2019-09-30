@@ -19,5 +19,5 @@ QUERY=
 		app_sub_id AS "APP SUB ID", 
 		duration AS "DURATION (IN MSECS)",
 		duration/1000 AS "DURATION (IN SECS)", 
-		starttime AS "START"
+		datetime(starttime/1000, 'UNIXEPOCH', 'localtime') AS "START"
 	FROM use_app
