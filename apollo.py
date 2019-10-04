@@ -169,10 +169,12 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 						data_stuff = data_stuff + data
 
 				if args.o == 'csv':
+					key = col_row[key_timestamp]
 					try:
-						loccsv.writerow([col_row[key_timestamp],activity, data_stuff,db,mod_name])
+						loccsv.writerow([key,activity, data_stuff,db,mod_name])
 					except:
-						loccsv.writerow([col_row[key_timestamp],activity, data_stuff.encode('utf8'),db,mod_name])
+						loccsv.writerow([key,activity, data_stuff.encode('utf8'),db,mod_name])
+
 				elif args.o == 'sql':
 					key = col_row[key_timestamp]
 					cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
