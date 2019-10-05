@@ -14,11 +14,14 @@
 * [SimpleKML](https://simplekml.readthedocs.io) - Copy the `simplekml` directory to the directory where apollo.py is being run from.
 
 ## Usage
-`python apollo.py -o {csv, sql} -p {ios, mac, yolo} -v {8,9,10,11,12,yolo} <modules directory> <data directory>`
+`python apollo.py -o {csv, sql} -p {ios, mac, yolo} -v {8,9,10,11,12,yolo} -k <modules directory> <data directory>`
 
 ## Output Options (-o)
 * `csv` - CSV
 * `sql` - SQLite Database
+
+## KMZ Output(-k)
+* Outputs location coordinates to separate files based on module.
 
 ## Platform Options (-p)
 * `ios`
