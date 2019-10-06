@@ -12,6 +12,7 @@
 
 ## Dependencies
 * [SimpleKML](https://simplekml.readthedocs.io) - Copy the `simplekml` directory to the directory where apollo.py is being run from. [Download here](https://pypi.org/project/simplekml/#files)
+* Depending on your python3 installation you may get a `No module named 'six` error, [you will need to install `six`](https://lmgtfy.com/?q=python3+install+six)
 
 ## Usage
 `python apollo.py -o {csv, sql} -p {ios, mac, yolo} -v {8,9,10,11,12,yolo} -k <modules directory> <data directory>`
