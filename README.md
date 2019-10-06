@@ -22,6 +22,8 @@
 
 ## KMZ Output(-k)
 * Outputs location coordinates to separate files based on module.
+* [iOS Location Mapping with APOLLO - I Know Where You Were Today, Yesterday, Last Month, and Years Ago!](https://www.mac4n6.com/blog/2019/8/21/i-know-where-you-were-today-yesterday-last-month-and-many-years-ago)
+* [iOS Location Mapping with APOLLO – Part 2: Cellular and Wi-Fi Data (locationd)](https://www.mac4n6.com/blog/2019/8/25/ios-location-mapping-with-apollo-part-2-cellular-and-wi-fi-data-locationd)
 
 ## Platform Options (-p)
 * `ios`
@@ -33,12 +35,20 @@
 * `yolo` - Just parse whatever. Use for ARTEMIS parsing.
 
 ## Getting Errors? Try This (Windows users, use eqivlent commands)
+You may see that APOLLO reports back "0 databases" found when executed, most likely from CurrentPowerlog.PLSQL and locationd modules. Two common directories with databases that cause problems due to permissions (depends on how files were extracted from device):
+* `/private/var/root/Library/Caches/locationd/`
+* `/private/var/containers/Shared/SystemGroup/[GUID]/Library/BatteryLife`
+### Fix Permissions:
+* `chmod -R 755 /private/var/containers/Shared/SystemGroup/[GUID_for BatteryLife Data]/`
+* `chmod -R 755 /private/var/root`
+
+### Still not working?
 * Check database permissions - Use `chmod` to give some databases with "all blank" permissions some sort of permission. (Happens with many types of physical-logical extractions.)
 * Check database ownership - Use `chown` to take ownership of the files.
 
 ## Thank You!
 * Thanks to Sam Alptekin of @sjc_CyberCrimes, script is much, much faster than original.
-* Thanks to @AlexisBrignoni for Python 3 support and ARTEMIS!
+* [Thanks to @AlexisBrignoni for Python 3 support and ARTEMIS!](https://abrignoni.blogspot.com/2019/08/artemis-android-support-for-apollo.html)
 
 ## References
 * [Knowledge is Power! Using the macOS/iOS knowledgeC.db Database to Determine Precise User and Application Usage](https://www.mac4n6.com/blog/2018/8/5/knowledge-is-power-using-the-knowledgecdb-database-on-macos-and-ios-to-determine-precise-user-and-application-usage)
