@@ -3,12 +3,11 @@
 * Presentation Slides: [From Apple Seeds to Apple Pie](https://github.com/mac4n6/Presentations/tree/master/From%20Apple%20Seeds%20to%20Apple%20Pie)
 * Presentation Slides: [Launching APOLLO: Creating a Simple Tool for Advanced Forensic Analysis](https://github.com/mac4n6/Presentations/tree/master/LaunchingAPOLLO)
 
-# BETA - FOR TESTING PURPOSES ONLY
-* This is your warning. I've tested a few modules but there is much more testing to be done.
+# v1.0
+* Software has bugs, always ensure your data makes sense and go to the original data to verify. Test, test, test!
 * Find a bug or a better query, let me know!
-* Extra warning on PowerLog modules, timestamps may be in the past and/or future - testing these.
 * Many more modules to come!
-* Python 3 (omg, finally!)
+* Python 3
 
 ## Dependencies
 * [SimpleKML](https://simplekml.readthedocs.io) - Copy the `simplekml` directory to the directory where apollo.py is being run from. [Download here](https://pypi.org/project/simplekml/#files)
