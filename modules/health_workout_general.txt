@@ -5,14 +5,14 @@ MODULE_NOTES=Health Workout, these workouts do not have additional metadata asso
 [Database Metadata]
 DATABASE=healthdb_secure.sqlite
 PLATFORMS=IOS
-VERSIONS=9,10,11,12
+VERSIONS=9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=k
 ACTIVITY=Health Workout (General)
 KEY_TIMESTAMP=START DATE
 
-[SQL Query 11,12]
+[SQL Query 11,12,13]
 QUERY=
 	SELECT
 	    DATETIME(SAMPLES.START_DATE + 978307200, 'UNIXEPOCH') AS "START DATE",
@@ -52,7 +52,7 @@ QUERY=
 	       ON WORKOUTS.DATA_ID = SAMPLES.DATA_ID 
 	WHERE
 	    WORKOUTS.ACTIVITY_TYPE NOT NULL 
-		AND KEY IS NULL
+		AND (KEY IS NULL OR KEY IS "HKIndoorWorkout")
 
 [SQL Query 9,10]
 QUERY=

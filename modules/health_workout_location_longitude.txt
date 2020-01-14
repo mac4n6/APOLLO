@@ -5,14 +5,14 @@ MODULE_NOTES=Health Indoor Location Longitude
 [Database Metadata]
 DATABASE=healthdb_secure.sqlite
 PLATFORMS=IOS
-VERSIONS=10,11,12
+VERSIONS=10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=health_workout_location_longitude
 ACTIVITY=Health Workout Location Longitude
 KEY_TIMESTAMP=START DATE
 
-[SQL Query 11,12]
+[SQL Query 11,12,13]
 QUERY=
 	SELECT
 	    DATETIME(SAMPLES.START_DATE + 978307200, 'UNIXEPOCH') AS "START DATE",

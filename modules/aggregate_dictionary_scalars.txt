@@ -5,14 +5,14 @@ MODULE_NOTES=Keeping track of various values on a per-day basis.
 [Database Metadata]
 DATABASE=ADDataStore.sqlitedb
 PLATFORMS=IOS
-VERSIONS=8,9,10,11,12
+VERSIONS=8,9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=aggregate_dictionary_scalars
 ACTIVITY=Aggregate Dictionary - Scalar
 KEY_TIMESTAMP=DAY
 
-[SQL Query 8,9,10,11,12]
+[SQL Query 8,9,10,11,12,13]
 QUERY=
 	SELECT
 	   KEY AS "KEY",

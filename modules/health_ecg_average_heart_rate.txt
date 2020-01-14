@@ -1,0 +1,33 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=Electrocardiogram (ECG) Average Heart Rate
+
+[Database Metadata]
+DATABASE=healthdb_secure.sqlite
+PLATFORMS=IOS
+VERSIONS=12,13
+
+[Query Metadata]
+QUERY_NAME=health_ecg_average_heart_rate
+ACTIVITY=ECG Average Heart Rate
+KEY_TIMESTAMP=START DATE
+
+[SQL Query 12,13]
+QUERY=
+	SELECT
+	    DATETIME(SAMPLES.START_DATE + 978307200, 'UNIXEPOCH') AS "START DATE",
+	    DATETIME(SAMPLES.END_DATE + 978307200, 'UNIXEPOCH') AS "END DATE",
+	    METADATA_VALUES.NUMERICAL_VALUE AS "ECG AVERAGE HEARTRATE"
+	FROM
+	    SAMPLES 
+	    LEFT OUTER JOIN
+	        METADATA_VALUES 
+	        ON METADATA_VALUES.OBJECT_ID = SAMPLES.DATA_ID 
+	    LEFT OUTER JOIN
+	        METADATA_KEYS 
+	        ON METADATA_KEYS.ROWID = METADATA_VALUES.KEY_ID 
+	    LEFT OUTER JOIN
+	        WORKOUTS 
+	        ON WORKOUTS.DATA_ID = SAMPLES.DATA_ID 
+	WHERE
+	    KEY IS "_HKPrivateMetadataKeyElectrocardiogramHeartRate"

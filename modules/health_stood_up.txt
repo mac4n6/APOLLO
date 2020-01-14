@@ -5,14 +5,14 @@ MODULE_NOTES=Health Stood Up
 [Database Metadata]
 DATABASE=healthdb_secure.sqlite
 PLATFORMS=IOS
-VERSIONS=9,10,11,12
+VERSIONS=9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=health_stood_up
 ACTIVITY=Health Stood Up
 KEY_TIMESTAMP=START DATE
 
-[SQL Query 9,10,11,12]
+[SQL Query 9,10,11,12,13]
 QUERY=
 	SELECT
 	   QUANTITY AS "STOOD UP",

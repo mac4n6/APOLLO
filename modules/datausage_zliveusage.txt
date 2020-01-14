@@ -5,14 +5,14 @@ MODULE_NOTES=Data Usage Traffic by Process.
 [Database Metadata]
 DATABASE=DataUsage.sqlite,DataUsage-watch.sqlite
 PLATFORMS=IOS
-VERSIONS=8,9,10,11,12
+VERSIONS=8,9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=datausage_zliveusage
 ACTIVITY=Data Usage
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query 8,9,10,11,12]
+[SQL Query 8,9,10,11,12,13]
 QUERY=
 	SELECT
 		DATETIME(ZLIVEUSAGE.ZTIMESTAMP + 978307200, 'unixepoch') AS "TIMESTAMP",
