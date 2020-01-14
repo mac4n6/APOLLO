@@ -1,6 +1,6 @@
 #!/usr/bin/python
 '''
-Copyright (c) 2019, Station X Labs, LLC
+Copyright (c) 2020, Station X Labs, LLC
 All rights reserved.
 Redistribution and use in source and binary forms, with or without
 modification, are permitted provided that the following conditions are met:
@@ -201,7 +201,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 					kml.savekmz(kmzfilename)	
 
 		except:
-			print("\t***ERROR***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data (ie: cache_encryptedB.db). Try using chown/chmod to change permissions/ownership.")
+			print("\t***WARNING***: Could not parse database ["+ db +"]. Often this is due to file permissions, or changes in the database schema. This also happens with same-named databases that contain different data or database schemas (ie: cache_encryptedB.db or knowledgeC.db). If it should work, try using chown/chmod to change permissions/ownership.")
 
 if __name__ == "__main__":
 
@@ -210,14 +210,14 @@ if __name__ == "__main__":
 	\n\nVery lazy parser to extract pattern-of-life data from SQLite databases on iOS/macOS datasets (though really any SQLite database if you make a configuration file and provide it the proper metadata details.\
 	\n\nOutputs include SQLite Database or CSV.\
 	\n\nYolo! Meant to run on anything and everything, like a honey badger - it don't care. Can be used with multiple dumps of devices. It will run all queries in all modules with no regard for versioning. May lead to redundant data since it can run more than one similar query. Be careful with this option.\
-	\n\n\tVersion: BETA 08252019 - TESTING PURPOSES ONLY, SERIOUSLY.\
-	\n\tUpdated: 08/25/2019\
+	\n\n\tVersion: APOLLO v1.0\
+	\n\tUpdated: 01/13/2020\
 	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com"
 		, prog='apollo.py'
 		, formatter_class=RawTextHelpFormatter)
 	parser.add_argument('-o', choices=['sql','csv'], required=True, action="store", help="Output: sql=SQLite or csv=CSV (required)")
 	parser.add_argument('-p', choices=['ios','mac','yolo'], required=True, action="store", help="Platform: ios=iOS [supported] or mac=macOS [not yet supported] (required).")
-	parser.add_argument('-v', choices=['8','9','10','11','12','yolo'], required=True, action="store",help="Version of OS (required).")
+	parser.add_argument('-v', choices=['8','9','10','11','12','13','yolo'], required=True, action="store",help="Version of OS (required).")
 	parser.add_argument('modules_directory',help="Path to Module Directory")
 	parser.add_argument('-k',help="Additional KMZ Output for Location Data",action="store_true")
 	parser.add_argument('data_dir_to_analyze',help="Path to Data Directory. It can be full file system dump or directory of extracted databases, it is recursive.")
@@ -236,7 +236,7 @@ if __name__ == "__main__":
 	data_dir = args.data_dir_to_analyze
 	platform = args.p
 	version = args.v
-	apollo_version = "08252019"
+	apollo_version = "01132019"
 
 	print("\n--------------------------------------------------------------------------------------")
 	print("APOLLO Version: " + apollo_version)
