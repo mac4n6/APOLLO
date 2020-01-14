@@ -5,14 +5,14 @@ MODULE_NOTES=Application/Device screen state/orientation
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORMS=IOS
-VERSIONS=11,12
+VERSIONS=11,12,13
 
 [Query Metadata]
 QUERY_NAME=powerlog_app_usage
 ACTIVITY=Application Usage
 KEY_TIMESTAMP=ADJUSTED_TIMESTAMP
 
-[SQL Query 11,12]
+[SQL Query 11,12,13]
 QUERY=
    SELECT
       DATETIME(SCREEN_STATE_TIMESTAMP + SYSTEM, 'unixepoch') AS ADJUSTED_TIMESTAMP,
@@ -33,7 +33,7 @@ QUERY=
             SCREENSTATE_ID,
             SCREEN_STATE_TIMESTAMP,
             TIME_OFFSET_TIMESTAMP,
-            MAX(TIME_OFFSET_ID) as max_id,
+            MAX(TIME_OFFSET_ID) AS max_id,
             SYSTEM,
             APPROLE,
             DISPLAY,
@@ -84,7 +84,7 @@ QUERY=
             SCREENSTATE_ID,
             SCREEN_STATE_TIMESTAMP,
             TIME_OFFSET_TIMESTAMP,
-            MAX(TIME_OFFSET_ID) as max_id,
+            MAX(TIME_OFFSET_ID) AS max_id,
             SYSTEM,
             APPROLE,
             DISPLAY,

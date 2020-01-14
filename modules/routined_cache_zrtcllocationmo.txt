@@ -5,14 +5,14 @@ MODULE_NOTES=Granular Location Data (~1 Week)
 [Database Metadata]
 DATABASE=CoreRoutine.sqlite,Cache.sqlite
 PLATFORMS=IOS
-VERSIONS=10,11,12
+VERSIONS=10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=routined_cache_zrtcllocationmo
 ACTIVITY=Location
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query 10,11,12]
+[SQL Query 10,11,12,13]
 QUERY=
    SELECT
       DATETIME(ZTIMESTAMP + 978307200, 'unixepoch') AS "TIMESTAMP",

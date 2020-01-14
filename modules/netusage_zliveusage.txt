@@ -5,14 +5,14 @@ MODULE_NOTES=Network Usage Traffic by Process.
 [Database Metadata]
 DATABASE=netusage.sqlite
 PLATFORMS=IOS
-VERSIONS=8,9,10,11,12
+VERSIONS=8,9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=netusage_zliveusage
 ACTIVITY=Network Usage
 KEY_TIMESTAMP=PROCESS TIMESTAMP
 
-[SQL Query 10,11,12]
+[SQL Query 10,11,12,13]
 QUERY=
     SELECT
         DATETIME(ZPROCESS.ZTIMESTAMP + 978307200, 'unixepoch') AS "PROCESS TIMESTAMP",

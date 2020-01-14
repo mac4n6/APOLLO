@@ -5,14 +5,14 @@ MODULE_NOTES=
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORMS=IOS
-VERSIONS=10,11,12
+VERSIONS=10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=powerlog_springboard_aggregate_notifications
 ACTIVITY=Application Usage
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query 10,11,12]
+[SQL Query 10,11,12,13]
 QUERY=
 	SELECT
 	   DATETIME(TIMESTAMP, 'unixepoch') AS TIMESTAMP,

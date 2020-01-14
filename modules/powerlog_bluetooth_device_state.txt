@@ -5,14 +5,14 @@ MODULE_NOTES=Keeps track of Bluetooth state on device, discoverability, connecti
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORMS=IOS
-VERSIONS=9,10,11,12
+VERSIONS=9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=powerlog_bluetooth_device_state
 ACTIVITY=Device Status
 KEY_TIMESTAMP=ADJUSTED_TIMESTAMP
 
-[SQL Query 9,10,11,12]
+[SQL Query 9,10,11,12,13]
 QUERY=
     SELECT
 		DATETIME(BLUETOOTHSTATE_TIMESTAMP + SYSTEM, 'unixepoch') AS ADJUSTED_TIMESTAMP,

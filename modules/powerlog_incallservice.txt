@@ -5,14 +5,14 @@ MODULE_NOTES=Provides calling service details and status.
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORMS=IOS
-VERSIONS=9,10,11,12
+VERSIONS=9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=powerlog_incallserivice
 ACTIVITY=Network Usage
 KEY_TIMESTAMP=ADJUSTED_TIMESTAMP
 
-[SQL Query 10,11,12]
+[SQL Query 10,11,12,13]
 QUERY=
    	SELECT
 		DATETIME(INCALLSERVICE_TIMESTAMP + SYSTEM, 'unixepoch') AS ADJUSTED_TIMESTAMP,

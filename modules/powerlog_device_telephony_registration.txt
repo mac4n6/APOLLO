@@ -1,18 +1,18 @@
 [Module Metadata]
 AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
-MODULE_NOTES=Records telephony registration details such as carrier and service.
+MODULE_NOTES=Records telephony registration details such AS carrier and service.
 
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORMS=IOS
-VERSIONS=9,10,11,12
+VERSIONS=9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=powerlog_device_telephony_registration
 ACTIVITY=Device Status
 KEY_TIMESTAMP=ADJUSTED_TIMESTAMP
 
-[SQL Query 9,10,11,12]
+[SQL Query 9,10,11,12,13]
 QUERY=
    	SELECT
 		DATETIME(TELEPHONYREG_TIMESTAMP + SYSTEM, 'unixepoch') AS ADJUSTED_TIMESTAMP,

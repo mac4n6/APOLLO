@@ -5,14 +5,14 @@ MODULE_NOTES=Accessory Connections - Accessories may be bluetooth devices like h
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORMS=IOS
-VERSIONS=9,10,11,12
+VERSIONS=9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=powerlog_accessory_connection
 ACTIVITY=Network Usage
 KEY_TIMESTAMP=ADJUSTED_TIMESTAMP
 
-[SQL Query 9,10,11,12]
+[SQL Query 9,10,11,12,13]
 QUERY=
    	SELECT
 		DATETIME(ACCESSORYCONNECTION_TIMESTAMP + SYSTEM, 'unixepoch') AS ADJUSTED_TIMESTAMP,

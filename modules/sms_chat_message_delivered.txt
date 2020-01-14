@@ -1,18 +1,18 @@
 [Module Metadata]
 AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
-MODULE_NOTES=SMS and Chat Messages, when the message was delivered.
+MODULE_NOTES=SMS and Chat Messages, when the message wAS delivered.
 
 [Database Metadata]
 DATABASE=sms.db
 PLATFORMS=IOS
-VERSIONS=8,9,10,11,12
+VERSIONS=8,9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=sms_chat
 ACTIVITY=SMS Chat - Message Delivered
 KEY_TIMESTAMP=DATE DELIVERED
 
-[SQL Query 8,9,10,11,12]
+[SQL Query 8,9,10,11,12,13]
 QUERY=
 	SELECT
 		CASE
@@ -30,7 +30,7 @@ QUERY=
 			WHEN LENGTH(MESSAGE.DATE_READ)=9 THEN DATETIME(MESSAGE.DATE_READ+978307200,"UNIXEPOCH")
 			ELSE "N/A"
 		END "DATE READ",
-		MESSAGE.TEXT as "MESSAGE",
+		MESSAGE.TEXT AS "MESSAGE",
 		HANDLE.ID AS "CONTACT ID",
 		MESSAGE.SERVICE AS "SERVICE",
 		MESSAGE.ACCOUNT AS "ACCOUNT",
