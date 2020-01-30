@@ -51,6 +51,16 @@ You may see that APOLLO reports back "0 databases" found when executed, most lik
 * Check database permissions - Use `chmod` to give some databases with "all blank" permissions some sort of permission. (Happens with many types of physical-logical extractions.)
 * Check database ownership - Use `chown` to take ownership of the files.
 
+## To Do List
+* Powerlog Gzip Files
+* Database Coalescing
+* MacOS-specifc modules and handling
+* Visualizations
+* Accept Zip file input
+* Modules:
+  * Screen Time
+  * Additional Health modules 
+
 ## Thank You!
 * Thanks to Sam Alptekin of @sjc_CyberCrimes, script is much, much faster than original.
 * [Thanks to @AlexisBrignoni for Python 3 support and ARTEMIS!](https://abrignoni.blogspot.com/2019/08/artemis-android-support-for-apollo.html)
