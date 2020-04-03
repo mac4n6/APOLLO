@@ -4,7 +4,7 @@ MODULE_NOTES=Wallet Passes
 
 [Database Metadata]
 DATABASE=passes23.sqlite
-PLATFORMS=IOS
+PLATFORM=IOS
 VERSIONS=10,11,12,13
 
 [Query Metadata]

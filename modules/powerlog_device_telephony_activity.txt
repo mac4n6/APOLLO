@@ -1,21 +1,21 @@
 [Module Metadata]
 AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
-MODULE_NOTES=
+MODULE_NOTES=Telephony Activity
 
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
-PLATFORMS=IOS
+PLATFORM=IOS
 VERSIONS=9,10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=powerlog_device_telephony_activity
-ACTIVITY=Device Status
+ACTIVITY=Telephony Activity
 KEY_TIMESTAMP=TIMESTAMP
 
 [SQL Query 9,10,11,12,13]
 QUERY=
    SELECT
-      DATETIME(TIMESTAMP, 'unixepoch') AS TIMESTAMP,
+      DATETIME(TIMESTAMP, 'UNIXEPOCH') AS TIMESTAMP,
       AIRPLANEMODE AS "AIRPLANE MODE",
       CALLSTATUS AS "CALL STATUS",
       SIGNALBARS AS "SIGNALS BARS",
