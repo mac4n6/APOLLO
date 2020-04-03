@@ -21,7 +21,7 @@
 * `pip3 install simplekml`
 
 ## Usage
-`python apollo.py -o {csv, sql} -p {ios, mac, yolo} -v {8,9,10,11,12,yolo} -k <modules directory> <data directory>`
+`python3 apollo.py -o {csv, sql} -p {apple, android, windows, yolo} -v {8,9,10,11,12,13,10.13,10.14,10.15,and9,and10,and11,win10_1803,win10_1809,win10_1903,win10_1909,yolo} -k <modules directory> <data directory>`
 
 ## Output Options (-o)
 * `csv` - CSV
@@ -33,12 +33,16 @@
 * [iOS Location Mapping with APOLLO – Part 2: Cellular and Wi-Fi Data (locationd)](https://www.mac4n6.com/blog/2019/8/25/ios-location-mapping-with-apollo-part-2-cellular-and-wi-fi-data-locationd)
 
 ## Platform Options (-p)
-* `ios`
-* `mac` [Offical support coming soon!]
+* `apple`
+* `android`
+* `windows`
 * `yolo` - Just parse whatever.  Use for ARTEMIS parsing.
 
 ## Version Options (-v)
 * iOS `8`, `9`, `10`, `11`, `12`
+* macOS `10.13`, `10.14`, `10.15`
+* Android `and8`, `and9`, `and10`
+* Windows 10 `win10_1803`, `win10_1809`, `win10_1903`, `win10_1909`
 * `yolo` - Just parse whatever. Use for ARTEMIS parsing.
 
 ## Getting Errors? Try This (Windows users, use eqivlent commands)
@@ -56,12 +60,13 @@ You may see that APOLLO reports back "0 databases" found when executed, most lik
 ## To Do List
 * Powerlog Gzip Files
 * Database Coalescing
-* MacOS-specifc modules and handling
 * Visualizations
 * Accept Zip file input
+* Output Formats (JSON?)
 * Modules:
   * Screen Time
   * Additional Health modules 
+  * Additional Native App Specific Modules 
 
 ## Thank You!
 * Thanks to Sam Alptekin of @sjc_CyberCrimes, script is much, much faster than original.
