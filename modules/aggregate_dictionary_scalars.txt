@@ -4,7 +4,7 @@ MODULE_NOTES=Keeping track of various values on a per-day basis.
 
 [Database Metadata]
 DATABASE=ADDataStore.sqlitedb
-PLATFORMS=IOS
+PLATFORM=IOS
 VERSIONS=8,9,10,11,12,13
 
 [Query Metadata]
@@ -15,8 +15,8 @@ KEY_TIMESTAMP=DAY
 [SQL Query 8,9,10,11,12,13]
 QUERY=
 	SELECT
+	   DATE(DAYSSINCE1970*86400, 'unixepoch') AS DAY,
 	   KEY AS "KEY",
-	   VALUE AS "VALUE",
-	   DATE(DAYSSINCE1970*86400, 'unixepoch') AS DAY
+	   VALUE AS "VALUE"
 	FROM
 	   SCALARS

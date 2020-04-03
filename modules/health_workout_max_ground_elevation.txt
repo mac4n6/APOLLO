@@ -4,7 +4,7 @@ MODULE_NOTES=Health Workout Maximum Ground Elevation
 
 [Database Metadata]
 DATABASE=healthdb_secure.sqlite
-PLATFORMS=IOS
+PLATFORM=IOS
 VERSIONS=12,13
 
 [Query Metadata]

@@ -4,7 +4,7 @@ MODULE_NOTES=Health Indoor Time of Day
 
 [Database Metadata]
 DATABASE=healthdb_secure.sqlite
-PLATFORMS=IOS
+PLATFORM=IOS
 VERSIONS=10,11,12,13
 
 [Query Metadata]
