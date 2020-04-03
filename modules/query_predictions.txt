@@ -4,7 +4,7 @@ MODULE_NOTES=Query_predictions.db
 
 [Database Metadata]
 DATABASE=query_predictions.db
-PLATFORMS=IOS
+PLATFORM=IOS
 VERSIONS=8,9,10,11,12,13
 
 [Query Metadata]
@@ -14,11 +14,11 @@ KEY_TIMESTAMP=START
 
 [SQL Query 8,9,10,11,12,13]
 QUERY=
-	select 
-		content,
-		isSent,
-		conversationId,
-		id,
-		uuid,
-		datetime(creationTimestamp, "UNIXEPOCH", "LOCALTIME") AS START
-		from messages
+	SELECT 
+		CONTENT,
+		ISSENT,
+		CONVERSATIONID,
+		ID,
+		UUID,
+		DATETIME(CREATIONTIMESTAMP, "UNIXEPOCH") AS START
+	FROM MESSAGES

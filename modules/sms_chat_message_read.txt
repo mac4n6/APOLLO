@@ -4,15 +4,15 @@ MODULE_NOTES=SMS and Chat Messages, when the message wAS read.
 
 [Database Metadata]
 DATABASE=sms.db
-PLATFORMS=IOS
-VERSIONS=8,9,10,11,12,13
+PLATFORM=IOS,MACOS
+VERSIONS=8,9,10,11,12,13,10.14,10.15
 
 [Query Metadata]
 QUERY_NAME=sms_chat
 ACTIVITY=SMS Chat - Message Read
 KEY_TIMESTAMP=DATE READ
 
-[SQL Query 8,9,10,11,12,13]
+[SQL Query 8,9,10,11,12,13,10.14,10.15]
 QUERY=
 	SELECT
 		CASE

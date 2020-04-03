@@ -4,7 +4,7 @@ MODULE_NOTES=Address
 
 [Database Metadata]
 DATABASE=Cloud.sqlite,Cloud-V2.sqlite
-PLATFORMS=IOS
+PLATFORM=IOS
 VERSIONS=13
 
 [Query Metadata]

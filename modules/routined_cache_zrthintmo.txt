@@ -4,18 +4,18 @@ MODULE_NOTES=Semi-granular Location Data (~1 Week)
 
 [Database Metadata]
 DATABASE=Cache.sqlite,CoreRoutine.sqlite
-PLATFORMS=IOS
+PLATFORM=IOS
 VERSIONS=10,11,12,13
 
 [Query Metadata]
 QUERY_NAME=routined_cache_zrthintmo
-ACTIVITY=Location
+ACTIVITY=Routined Location
 KEY_TIMESTAMP=TIMESTAMP
 
 [SQL Query 10,11,12,13]
 QUERY=
    SELECT
-      DATETIME(ZDATE + 978307200, 'unixepoch') AS "TIMESTAMP",
+      DATETIME(ZDATE + 978307200, 'UNIXEPOCH') AS "TIMESTAMP",
       ZLATITUDE || ", " || ZLONGITUDE AS "COORDINATES",
       ZSOURCE AS "SOURCE",
       ZLATITUDE AS "LATITUDE",

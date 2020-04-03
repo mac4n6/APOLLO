@@ -1,0 +1,39 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=System Policy Configuration - KextPolicy - Kext Load History V3
+
+[Database Metadata]
+DATABASE=KextPolicy
+PLATFORM=macOS
+VERSIONS=10.14,10.15
+
+[Query Metadata]
+QUERY_NAME=systempolicyconfig_kextpolicy_kext_load_history_v3
+ACTIVITY=System Policy Configuration - Kext Load History
+KEY_TIMESTAMP=CREATED AT
+
+[SQL Query 10.15]
+QUERY=
+	SELECT
+		CREATED_AT AS 'CREATED AT',
+		LAST_SEEN AS 'LAST SEEN',
+		PATH AS 'PATH',
+		TEAM_ID AS 'TEAM ID',
+		BUNDLE_ID AS 'BUNDLE ID',
+		BOOT_UUID AS 'BOOT  UUID',
+		FLAGS AS 'FLAGS',
+		CDHASH AS 'CDHASH'
+	FROM KEXT_LOAD_HISTORY_V3
+
+
+[SQL Query 10.13,10.14]
+QUERY=
+	SELECT
+		CREATED_AT AS 'CREATED AT',
+		LAST_SEEN AS 'LAST SEEN',
+		PATH AS 'PATH',
+		TEAM_ID AS 'TEAM ID',
+		BUNDLE_ID AS 'BUNDLE ID',
+		BOOT_UUID AS 'BOOT  UUID',
+		FLAGS AS 'FLAGS'
+	FROM KEXT_LOAD_HISTORY_V3

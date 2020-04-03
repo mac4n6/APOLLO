@@ -1,0 +1,20 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=System Policy Configuration - ExecPolicy - Old Platform Cache
+
+[Database Metadata]
+DATABASE=ExecPolicy
+PLATFORM=MACOS
+VERSIONS=10.14,10.15
+
+[Query Metadata]
+QUERY_NAME=systempolicyconfig_execpolicy_policy_old_platform_cache
+ACTIVITY=System Policy Configuration - Old Platform Cache
+KEY_TIMESTAMP=TIMESTAMP
+
+[SQL Query 10.14,10.15]
+QUERY=
+	SELECT
+		DATETIME(TS,'UNIXEPOCH') AS 'TIMESTAMP',
+		KEY
+	FROM OLD_PLATFORM_CACHE
