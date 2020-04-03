@@ -206,18 +206,18 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 if __name__ == "__main__":
 
 	parser = argparse.ArgumentParser(description="\
-	Apple Pattern of Life Lazy Outputter (APoLLO)\
-	\n\nVery lazy parser to extract pattern-of-life data from SQLite databases on iOS/macOS datasets (though really any SQLite database if you make a configuration file and provide it the proper metadata details.\
+	Apple Pattern of Life Lazy Outputter (APOLLO)\
+	\n\nVery lazy parser to extract pattern-of-life data from SQLite databases on iOS/macOS/Android/Windows datasets (though really any SQLite database if you make a configuration file and provide it the proper metadata details.\
 	\n\nOutputs include SQLite Database or CSV.\
 	\n\nYolo! Meant to run on anything and everything, like a honey badger - it don't care. Can be used with multiple dumps of devices. It will run all queries in all modules with no regard for versioning. May lead to redundant data since it can run more than one similar query. Be careful with this option.\
-	\n\n\tVersion: APOLLO 02282020 (v1.0)\
-	\n\tUpdated: 02/28/2020\
+	\n\n\tVersion: APOLLO 04032020 (v1.1)\
+	\n\tUpdated: 04/03/2020\
 	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com"
 		, prog='apollo.py'
 		, formatter_class=RawTextHelpFormatter)
 	parser.add_argument('-o', choices=['sql','csv'], required=True, action="store", help="Output: sql=SQLite or csv=CSV (required)")
-	parser.add_argument('-p', choices=['ios','mac','yolo'], required=True, action="store", help="Platform: ios=iOS [supported] or mac=macOS [not yet supported] (required).")
-	parser.add_argument('-v', choices=['8','9','10','11','12','13','yolo'], required=True, action="store",help="Version of OS (required).")
+	parser.add_argument('-p', choices=['apple','android','windows','yolo'], default='apple', action="store", help="Platform: apple=iOS/macOS, Android, Windows or yolo (run on whatever")
+	parser.add_argument('-v', choices=['8','9','10','11','12','13','10.13','10.14','10.15', 'and9','and10','and11','win10_1803','win10_1809','win10_1903','win10_1909','yolo'], required=True, action="store",help="OS Version (required). iOS=8-13, macOS=10.13-10.15, android 9-11, Windows 10 1803-1909")
 	parser.add_argument('modules_directory',help="Path to Module Directory")
 	parser.add_argument('-k',help="Additional KMZ Output for Location Data",action="store_true")
 	parser.add_argument('data_dir_to_analyze',help="Path to Data Directory. It can be full file system dump or directory of extracted databases, it is recursive.")
@@ -236,7 +236,7 @@ if __name__ == "__main__":
 	data_dir = args.data_dir_to_analyze
 	platform = args.p
 	version = args.v
-	apollo_version = "02282020"
+	apollo_version = "04032020"
 
 	print("\n--------------------------------------------------------------------------------------")
 	print("APOLLO Version: " + apollo_version)
