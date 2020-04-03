@@ -1,0 +1,23 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=Routined Locations
+
+[Database Metadata]
+DATABASE=cache_encryptedB.db
+PLATFORM=IOS
+VERSIONS=8,9
+
+[Query Metadata]
+QUERY_NAME=routined_cacheencryptedB_hint
+ACTIVITY=Routined Location
+KEY_TIMESTAMP=TIMESTAMP
+
+[SQL Query 8,9]
+QUERY=
+	SELECT
+		DATETIME(TIMESTAMP + 978307200,'UNIXEPOCH') AS "TIMESTAMP",
+		LATITUDE || ", " || LONGITUDE AS "COORDINATES",
+		HORIZONTALACCURACY AS "HORIZONTAL ACCURACY",
+		LATITUDE AS "LATITUDE",
+		LONGITUDE AS "LONGITUDE"
+	FROM HINT
