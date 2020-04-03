@@ -3,7 +3,9 @@
 * Presentation Slides: [From Apple Seeds to Apple Pie](https://github.com/mac4n6/Presentations/tree/master/From%20Apple%20Seeds%20to%20Apple%20Pie)
 * Presentation Slides: [Launching APOLLO: Creating a Simple Tool for Advanced Forensic Analysis](https://github.com/mac4n6/Presentations/tree/master/LaunchingAPOLLO)
 
-# v1.0
+# v1.1
+* MacOS Support - many new modules. Initial support for 10.15 but also some older versions 10.13 & 10.14. If I missed labeling a query with an older version, please let me know or do a pull request on that module.
+* Added "support" for Android/Windows - just need modules created (that will not be me).
 * Software has bugs, always ensure your data makes sense and go to the original data to verify. Test, test, test!
 * Find a bug or a better query, let me know!
 * Many more modules to come!
