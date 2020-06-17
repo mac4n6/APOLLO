@@ -1,0 +1,42 @@
+[Module Metadata]
+AUTHOR=Sarah Edwards/mac4n6.com/@iamevltwin
+MODULE_NOTES=Photos Share All
+
+[Database Metadata]
+DATABASE=knowledgeC.db
+PLATFORM=IOS
+VERSIONS=13
+
+[Query Metadata]
+QUERY_NAME=knowledge_photos_share_all
+ACTIVITY=Photos Share All
+KEY_TIMESTAMP=START
+
+[SQL Query 13]
+QUERY=
+   SELECT
+      DATETIME(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') AS "START", 
+      DATETIME(ZOBJECT.ZENDDATE+978307200,'UNIXEPOCH') AS "END",
+     ZOBJECT.ZVALUESTRING AS "STRING",
+      CASE ZOBJECT.ZSTARTDAYOFWEEK 
+         WHEN "1" THEN "Sunday"
+         WHEN "2" THEN "Monday"
+         WHEN "3" THEN "Tuesday"
+         WHEN "4" THEN "Wednesday"
+         WHEN "5" THEN "Thursday"
+         WHEN "6" THEN "Friday"
+         WHEN "7" THEN "Saturday"
+      END "DAY OF WEEK",
+      ZOBJECT.ZSECONDSFROMGMT/3600 AS "GMT OFFSET",
+      DATETIME(ZOBJECT.ZCREATIONDATE+978307200,'UNIXEPOCH') AS "ENTRY CREATION",
+      ZOBJECT.ZUUID AS "UUID", 
+      ZOBJECT.Z_PK AS "ZOBJECT TABLE ID"
+   FROM ZOBJECT
+         LEFT JOIN
+         ZSTRUCTUREDMETADATA 
+         ON ZOBJECT.ZSTRUCTUREDMETADATA = ZSTRUCTUREDMETADATA.Z_PK 
+      LEFT JOIN
+         ZSOURCE 
+         ON ZOBJECT.ZSOURCE = ZSOURCE.Z_PK 
+   WHERE
+      ZSTREAMNAME = "/photos/share/all"
