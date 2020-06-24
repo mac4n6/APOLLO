@@ -127,7 +127,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 	for db in database_names:
 		print("\tExecuting module on: " + db)
 
-		if args.k == True and activity == "Location":
+		if args.k == True and "Location" in activity:
 			kml = Kml()
 			sharedstyle = Style()
 			sharedstyle.iconstyle.color =  'ff0000ff'
@@ -180,7 +180,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 					cw.execute("INSERT INTO APOLLO (Key, Activity, Output, Database, Module) VALUES (?, ?, ?, ?, ?)",(key, activity, data_stuff, db, mod_name))
 
 				if len(rows) > 0:
-					if args.k == True and activity == "Location":
+					if args.k == True and "Location" in activity:
 						coords_search = re.search(r'COORDINATES: [\d\.\,\ \-]*',data_stuff)
 						coords = coords_search.group(0).split(" ")
 
@@ -194,7 +194,7 @@ def run_module(mod_name,query_name,database_names,activity,key_timestamp,sql_que
 						total_loc_records = total_loc_records + 1
 
 			if len(rows) > 0:
-				if args.k == True and activity == "Location":
+				if args.k == True and "Location" in activity:
 					kmzfilename = query_name + ".kmz"
 					print("\t\tNumber of Location Records: " + str(loc_records))
 					print("\t\t===> Saving KMZ to " + kmzfilename + "...")
@@ -210,8 +210,8 @@ if __name__ == "__main__":
 	\n\nVery lazy parser to extract pattern-of-life data from SQLite databases on iOS/macOS/Android/Windows datasets (though really any SQLite database if you make a configuration file and provide it the proper metadata details.\
 	\n\nOutputs include SQLite Database or CSV.\
 	\n\nYolo! Meant to run on anything and everything, like a honey badger - it don't care. Can be used with multiple dumps of devices. It will run all queries in all modules with no regard for versioning. May lead to redundant data since it can run more than one similar query. Be careful with this option.\
-	\n\n\tVersion: APOLLO 06212020 (v1.1)\
-	\n\tUpdated: 06/21/2020\
+	\n\n\tVersion: APOLLO 06242020 (v1.2)\
+	\n\tUpdated: 06/24/2020\
 	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com"
 		, prog='apollo.py'
 		, formatter_class=RawTextHelpFormatter)
@@ -236,7 +236,7 @@ if __name__ == "__main__":
 	data_dir = args.data_dir_to_analyze
 	platform = args.p
 	version = args.v
-	apollo_version = "06212020"
+	apollo_version = "06242020"
 
 	print("\n--------------------------------------------------------------------------------------")
 	print("APOLLO Version: " + apollo_version)
