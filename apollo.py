@@ -1,27 +1,60 @@
-#!/usr/bin/python
 '''
-Copyright (c) 2020, Station X Labs, LLC
-All rights reserved.
-Redistribution and use in source and binary forms, with or without
-modification, are permitted provided that the following conditions are met:
-	* Redistributions of source code must retain the above copyright
-	  notice, this list of conditions and the following disclaimer.
-	* Redistributions in binary form must reproduce the above copyright
-	  notice, this list of conditions and the following disclaimer in the
-	  documentation and/or other materials provided with the distribution.
-	* Neither the name of the Station X Labs, LLC nor the
-	  names of its contributors may be used to endorse or promote products
-	  derived from this software without specific prior written permission.
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL STATION X LABS, LLC BE LIABLE FOR ANY
-DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
-(INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
-LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
-ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
-(INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
-SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+--------------------------------------------------------------------------------
+      Copyright (c) 2018-2020 Sarah Edwards (Station X Labs, LLC, 
+      @iamevltwin, mac4n6.com). All rights reserved.
+
+      This software is provided "as is," without warranty of any kind,
+      express or implied.  In no event shall the author or contributors
+      be held liable for any damages arising in any way from the use of
+      this software.
+
+      The contents of this file are DUAL-LICENSED.  You may modify and/or
+      redistribute this software according to the terms of one of the
+      following two licenses (at your option):
+
+      LICENSE 1 ("BSD-like with acknowledgment clause"):
+
+      Permission is granted to anyone to use this software for any purpose,
+      including commercial applications, and to alter it and redistribute
+      it freely, subject to the following restrictions:
+
+      1. Redistributions of source code must retain the above copyright
+         notice, disclaimer, and this list of conditions.
+      2. Redistributions in binary form must reproduce the above copyright
+         notice, disclaimer, and this list of conditions in the documenta-
+         tion and/or other materials provided with the distribution.
+      3. All advertising, training, and documentation materials mentioning 
+         features or use of this software must display the following 
+         acknowledgment. Character-limited social media may abbreviate this 
+         acknowledgment to include author and APOLLO name ie: "This new 
+         feature brought to you by @iamevltwin's APOLLO". Please make an 
+         effort credit the appropriate authors on specific APOLLO modules.
+         The spirit of this clause is to give public acknowledgment to 
+         researchers where credit is due.
+
+            This product includes software developed by Sarah Edwards 
+            (Station X Labs, LLC, @iamevltwin, mac4n6.com) and other 
+            contributors as part of APOLLO (Apple Pattern of Life Lazy 
+            Output'er). 
+
+
+      LICENSE 2 (GNU GPL v3 or later):
+
+      This file is part of APOLLO (Apple Pattern of Life Lazy Output'er).
+
+      APOLLO is free software: you can redistribute it and/or modify
+      it under the terms of the GNU General Public License as published by
+      the Free Software Foundation, either version 3 of the License, or
+      (at your option) any later version.
+
+      APOLLO is distributed in the hope that it will be useful,
+      but WITHOUT ANY WARRANTY; without even the implied warranty of
+      MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+      GNU General Public License for more details.
+
+      You should have received a copy of the GNU General Public License
+      along with APOLLO.  If not, see <https://www.gnu.org/licenses/>.
+--------------------------------------------------------------------------------
 '''
 
 from __future__ import absolute_import
@@ -210,8 +243,8 @@ if __name__ == "__main__":
 	\n\nVery lazy parser to extract pattern-of-life data from SQLite databases on iOS/macOS/Android/Windows datasets (though really any SQLite database if you make a configuration file and provide it the proper metadata details.\
 	\n\nOutputs include SQLite Database or CSV.\
 	\n\nYolo! Meant to run on anything and everything, like a honey badger - it don't care. Can be used with multiple dumps of devices. It will run all queries in all modules with no regard for versioning. May lead to redundant data since it can run more than one similar query. Be careful with this option.\
-	\n\n\tVersion: APOLLO 06302020 (v1.2)\
-	\n\tUpdated: 06/30/2020\
+	\n\n\tVersion: APOLLO 10062020 (v1.3)\
+	\n\tUpdated: 10/06/2020\
 	\n\tAuthor: Sarah Edwards | @iamevltwin | mac4n6.com"
 		, prog='apollo.py'
 		, formatter_class=RawTextHelpFormatter)
@@ -236,7 +269,7 @@ if __name__ == "__main__":
 	data_dir = args.data_dir_to_analyze
 	platform = args.p
 	version = args.v
-	apollo_version = "06302020"
+	apollo_version = "10062020"
 
 	print("\n--------------------------------------------------------------------------------------")
 	print("APOLLO Version: " + apollo_version)
