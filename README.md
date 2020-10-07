@@ -3,13 +3,8 @@
 * Presentation Slides: [From Apple Seeds to Apple Pie](https://github.com/mac4n6/Presentations/tree/master/From%20Apple%20Seeds%20to%20Apple%20Pie)
 * Presentation Slides: [Launching APOLLO: Creating a Simple Tool for Advanced Forensic Analysis](https://github.com/mac4n6/Presentations/tree/master/LaunchingAPOLLO)
 
-# v1.1
-* MacOS Support - many new modules. Initial support for 10.15 but also some older versions 10.13 & 10.14. If I missed labeling a query with an older version, please let me know or do a pull request on that module.
-* Added "support" for Android/Windows - just need modules created (that will not be me).
-* Software has bugs, always ensure your data makes sense and go to the original data to verify. Test, test, test!
-* Find a bug or a better query, let me know!
-* Many more modules to come!
-* Python 3
+# v1.3
+* License Updated
 
 ## Dependencies
 * [SimpleKML](https://simplekml.readthedocs.io) - Copy the `simplekml` directory to the directory where apollo.py is being run from. [Download here](https://pypi.org/project/simplekml/#files)
@@ -36,14 +31,14 @@
 * `apple`
 * `android`
 * `windows`
-* `yolo` - Just parse whatever.  Use for ARTEMIS parsing.
+* `yolo` - Just parse whatever. Will use all available queries. Be careful with this option as you may get redundant data. 
 
 ## Version Options (-v)
 * iOS `8`, `9`, `10`, `11`, `12`
 * macOS `10.13`, `10.14`, `10.15`
 * Android `and8`, `and9`, `and10`
 * Windows 10 `win10_1803`, `win10_1809`, `win10_1903`, `win10_1909`
-* `yolo` - Just parse whatever. Use for ARTEMIS parsing.
+* `yolo` - Just parse whatever. Will use all available queries. Be careful with this option as you may get redundant data.
 
 ## Getting Errors? Try This (Windows users, use eqivlent commands)
 You may see that APOLLO reports back "0 databases" found when executed, most likely from CurrentPowerlog.PLSQL and locationd modules. Two common directories with databases that cause problems due to permissions (depends on how files were extracted from device):
@@ -70,7 +65,7 @@ You may see that APOLLO reports back "0 databases" found when executed, most lik
 
 ## Thank You!
 * Thanks to Sam Alptekin of @sjc_CyberCrimes, script is much, much faster than original.
-* [Thanks to @AlexisBrignoni for Python 3 support and ARTEMIS!](https://abrignoni.blogspot.com/2019/08/artemis-android-support-for-apollo.html)
+* Thanks to @AlexisBrignoni for Python 3 support.
 
 ## References
 * [Knowledge is Power! Using the macOS/iOS knowledgeC.db Database to Determine Precise User and Application Usage](https://www.mac4n6.com/blog/2018/8/5/knowledge-is-power-using-the-knowledgecdb-database-on-macos-and-ios-to-determine-precise-user-and-application-usage)
