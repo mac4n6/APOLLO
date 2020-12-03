@@ -62,15 +62,15 @@ MODULE_NOTES=Passes/Wallet activity, shows context.
 
 [Database Metadata]
 DATABASE=knowledgeC.db
-PLATFORM=IOS,MACOS
-VERSIONS=11,12,13
+PLATFORM=IOS
+VERSIONS=11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=knowledge_app_activity_passbook
 ACTIVITY=Passes/Wallet Activity
 KEY_TIMESTAMP=START
 
-[SQL Query 12,13]
+[SQL Query 12,13,14]
 QUERY=
 	SELECT
 		DATETIME(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') AS "START", 

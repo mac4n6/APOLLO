@@ -63,14 +63,14 @@ MODULE_NOTES=Inferred microLocation Visit
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORM=IOS
-VERSIONS=13
+VERSIONS=13,14
 
 [Query Metadata]
 QUERY_NAME=knowledge_inferred_microlocation_visit
 ACTIVITY=Inferred microLocation Visit
 KEY_TIMESTAMP=START
 
-[SQL Query 13]
+[SQL Query 13,14]
 QUERY=
    SELECT
       DATETIME(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') AS "START", 

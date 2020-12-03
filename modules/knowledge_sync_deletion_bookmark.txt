@@ -63,14 +63,14 @@ MODULE_NOTES=Knowledge Sync Deletion Bookmark
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORM=IOS,MACOS
-VERSIONS=12.13,10.14,10.15
+VERSIONS=12.13,10.14,10.15,14
 
 [Query Metadata]
 QUERY_NAME=knowledge_sync_deletion_bookmark
 ACTIVITY=Knowledge Sync Deletion Bookmark
 KEY_TIMESTAMP=START
 
-[SQL Query 12,13,10.14,10.15]
+[SQL Query 12,13,10.14,10.15,14]
 QUERY=
    SELECT
       DATETIME(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') AS "START", 

@@ -63,14 +63,14 @@ MODULE_NOTES=Wallet Unique Passes & Cards
 [Database Metadata]
 DATABASE=passes23.sqlite
 PLATFORM=IOS
-VERSIONS=10,11,12,13
+VERSIONS=10,11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=passes23_unique_passes_cards
 ACTIVITY=Wallet Unique Pass/Card
 KEY_TIMESTAMP=INGESTED DATE
 
-[SQL Query 10,11,12,13]
+[SQL Query 10,11,12,13,14]
 QUERY=
 	SELECT
 		DISTINCT(SERIAL_NUMBER) AS "SERIAL NUMBER",

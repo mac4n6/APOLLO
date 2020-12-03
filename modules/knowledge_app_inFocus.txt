@@ -63,14 +63,14 @@ MODULE_NOTES=Application Usage, shows application in focus on device.
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORM=IOS,MACOS
-VERSIONS=11,12,13,10.13,10.14,10.15
+VERSIONS=11,12,13,10.13,10.14,10.15,10.16,14
 
 [Query Metadata]
 QUERY_NAME=knowledge_app_inFocus
 ACTIVITY=Application In Focus
 KEY_TIMESTAMP=START
 
-[SQL Query 11,12,13,10.13,10.14,10.15]
+[SQL Query 11,12,13,10.13,10.14,10.15,10.16,14]
 QUERY=
 	SELECT
 		DATETIME(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') AS "START", 

@@ -63,14 +63,14 @@ MODULE_NOTES=Weather activity, shows context.
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORM=IOS
-VERSIONS=11,12,13
+VERSIONS=11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=knowledge_app_activity_weather
 ACTIVITY=Weather Activity
 KEY_TIMESTAMP=START
 
-[SQL Query 12,13]
+[SQL Query 12,13,14]
 QUERY=
 	SELECT
 		DATETIME(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') AS "START", 

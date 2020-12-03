@@ -63,14 +63,14 @@ MODULE_NOTES=User Waking Event
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORM=IOS
-VERSIONS=12,13
+VERSIONS=12,13,14
 
 [Query Metadata]
 QUERY_NAME=knowledge_system_userwakingevent
 ACTIVITY=User Waking Event
 KEY_TIMESTAMP=START
 
-[SQL Query 12,13]
+[SQL Query 12,13,14]
 QUERY=
    SELECT
       DATETIME(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') AS "START", 

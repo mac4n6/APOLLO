@@ -63,14 +63,14 @@ MODULE_NOTES=What is currently playing in various audio apps.
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORM=IOS,MACOS
-VERSIONS=11,12,13,10.15
+VERSIONS=11,12,13,10.15,10.16,14
 
 [Query Metadata]
 QUERY_NAME=knowledge_audio_media_nowplaying
 ACTIVITY=Now Playing
 KEY_TIMESTAMP=START
 
-[SQL Query 13,10.15]
+[SQL Query 13,10.15,10.16,14]
 QUERY=
    SELECT
       DATETIME(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') AS "START", 

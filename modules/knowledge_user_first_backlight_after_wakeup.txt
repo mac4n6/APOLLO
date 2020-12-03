@@ -63,14 +63,14 @@ MODULE_NOTES=First Backlight On After Wakeup
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORM=IOS
-VERSIONS=11,12,13
+VERSIONS=11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=knowledge_user_first_backlight_after_wakeup
 ACTIVITY=First Backlight On After Wakeup
 KEY_TIMESTAMP=START
 
-[SQL Query 11,12,13]
+[SQL Query 11,12,13,14]
 QUERY=
    SELECT
       DATETIME(ZOBJECT.ZSTARTDATE+978307200,'UNIXEPOCH') AS "START", 
