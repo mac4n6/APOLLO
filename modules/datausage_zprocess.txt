@@ -63,14 +63,14 @@ MODULE_NOTES=Data Usage Processes/Bundle IDs.
 [Database Metadata]
 DATABASE=DataUsage.sqlite,DataUsage-watch.sqlite
 PLATFORM=IOS
-VERSIONS=8,9,10,11,12,13
+VERSIONS=8,9,10,11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=datausage_zprocess
 ACTIVITY=Data Usage
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query 8,9,10,11,12,13]
+[SQL Query 8,9,10,11,12,13,14]
 QUERY=
 	SELECT
 		DATETIME(ZPROCESS.ZTIMESTAMP+ 978307200, 'UNIXEPOCH') AS "TIMESTAMP",

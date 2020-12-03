@@ -63,14 +63,14 @@ MODULE_NOTES=Contact Interaction Keywords
 [Database Metadata]
 DATABASE=interactionC.db
 PLATFORM=IOS,MACOS
-VERSIONS=9,10,11,12,13,10.15
+VERSIONS=9,10,11,12,13,10.15,10.16,14
 
 [Query Metadata]
 QUERY_NAME=interaction_contact_interactions_keywords
 ACTIVITY=Contact Interaction Keywords
 KEY_TIMESTAMP=CREATION DATE
 
-[SQL Query 12,13,10.15]
+[SQL Query 12,13,10.15,10.16,14]
 QUERY=
    SELECT 
       DATETIME(ZKEYWORDS.ZCREATIONDATE+ 978307200, 'UNIXEPOCH') AS 'CREATION DATE', 

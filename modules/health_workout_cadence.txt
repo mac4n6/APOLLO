@@ -63,14 +63,14 @@ MODULE_NOTES=Health Workout Average Cadence
 [Database Metadata]
 DATABASE=healthdb_secure.sqlite
 PLATFORM=IOS
-VERSIONS=12,13
+VERSIONS=12,13,14
 
 [Query Metadata]
 QUERY_NAME=health_workout_cadence
 ACTIVITY=Health Workout Average Cadence
 KEY_TIMESTAMP=START DATE
 
-[SQL Query 12,13]
+[SQL Query 12,13,14]
 QUERY=
 	SELECT
 	    DATETIME(SAMPLES.START_DATE + 978307200, 'UNIXEPOCH') AS "START DATE",

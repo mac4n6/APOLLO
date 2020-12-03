@@ -63,14 +63,14 @@ MODULE_NOTES=Health Flights Climbed
 [Database Metadata]
 DATABASE=healthdb_secure.sqlite
 PLATFORM=IOS
-VERSIONS=9,10,11,12,13
+VERSIONS=9,10,11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=health_flights
 ACTIVITY=Health Flights Climbed
 KEY_TIMESTAMP=START DATE
 
-[SQL Query 9,10,11,12,13]
+[SQL Query 9,10,11,12,13,14]
 QUERY=
 	SELECT
 		DATETIME(SAMPLES.START_DATE + 978307200, 'UNIXEPOCH') AS "START DATE",

@@ -63,14 +63,14 @@ MODULE_NOTES=Keeping track of various values on a per-day basis.
 [Database Metadata]
 DATABASE=ADDataStore.sqlitedb
 PLATFORM=IOS
-VERSIONS=8,9,10,11,12,13
+VERSIONS=8,9,10,11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=aggregate_dictionary_distributed_keys
 ACTIVITY=Aggregate Dictionary - Distributed Key
 KEY_TIMESTAMP=DAY
 
-[SQL Query 8,9,10,11,12,13]
+[SQL Query 8,9,10,11,12,13,14]
 QUERY=
 	SELECT
 		DATE(DISTRIBUTIONKEYS.DAYSSINCE1970*86400, 'unixepoch') AS "DAY",
