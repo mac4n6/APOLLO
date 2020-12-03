@@ -1,26 +1,30 @@
 # Apple Pattern of Life Lazy Output'er (APOLLO)
-* Originally presented as the first ever [Objective by the Sea](https://objectivebythesea.com/) - Mac Security Conference in 2018
-* Presentation Slides: [From Apple Seeds to Apple Pie](https://github.com/mac4n6/Presentations/tree/master/From%20Apple%20Seeds%20to%20Apple%20Pie)
-* Presentation Slides: [Launching APOLLO: Creating a Simple Tool for Advanced Forensic Analysis](https://github.com/mac4n6/Presentations/tree/master/LaunchingAPOLLO)
+
+# v1.4
+* Gather database files on macOS and jailbroken iOS devices, gather_macos and gather_ios (IP/Port required)
+* Ability to ignore certain directories with --ignore
+* Improved CSV Output
+* JSON Output within SQLite Output
 
 # v1.3
 * License Updated
 
 ## Dependencies
 * [SimpleKML](https://simplekml.readthedocs.io) - Copy the `simplekml` directory to the directory where apollo.py is being run from. [Download here](https://pypi.org/project/simplekml/#files)
-* Depending on your python3 installation you may get a `No module named 'six` error, [you will need to install `six`](https://lmgtfy.com/?q=python3+install+six)
 
-### On macOS 10.15 to install `six` and `simplekml` dependencies:
+### To install `simplekml` dependencies on macOS:
 * `sudo easy_install pip`
-* `pip3 install six`
 * `pip3 install simplekml`
 
 ## Usage
-`python3 apollo.py -o {csv, sql} -p {apple, android, windows, yolo} -v {8,9,10,11,12,13,10.13,10.14,10.15,and9,and10,and11,win10_1803,win10_1809,win10_1903,win10_1909,yolo} -k <modules directory> <data directory>`
+`python3 apollo.py {gather_macos, gather_ios} <modules directory> <data directory> --ignore <dir>`
+
+`python3 apollo.py extract -o {csv, sql, sql_json} -p {apple, android, windows, yolo} -v {8,9,10,11,12,13,14,10.13,10.14,10.15,10.16,and9,and10,and11,win10_1803,win10_1809,win10_1903,win10_1909,yolo} -k <modules directory> <data directory>`
 
 ## Output Options (-o)
-* `csv` - CSV
-* `sql` - SQLite Database
+* `csv` - CSV (Tab Delimited)
+* `sql` - SQLite Database (Output in square brackets)
+* `sql_json` - SQLite Database (Output in JSON)
 
 ## KMZ Output(-k)
 * Outputs location coordinates to separate files based on module.
@@ -34,13 +38,16 @@
 * `yolo` - Just parse whatever. Will use all available queries. Be careful with this option as you may get redundant data. 
 
 ## Version Options (-v)
-* iOS `8`, `9`, `10`, `11`, `12`
-* macOS `10.13`, `10.14`, `10.15`
+* iOS `8`, `9`, `10`, `11`, `12`,`13`,`14`
+* macOS `10.13`, `10.14`, `10.15`,`10.16` (macOS 11)
 * Android `and8`, `and9`, `and10`
 * Windows 10 `win10_1803`, `win10_1809`, `win10_1903`, `win10_1909`
 * `yolo` - Just parse whatever. Will use all available queries. Be careful with this option as you may get redundant data.
 
 ## Getting Errors? Try This (Windows users, use eqivlent commands)
+
+* Pro Tip: The 'gather' functions chmod/chown the files to ensure they are accessible.
+
 You may see that APOLLO reports back "0 databases" found when executed, most likely from CurrentPowerlog.PLSQL and locationd modules. Two common directories with databases that cause problems due to permissions (depends on how files were extracted from device):
 * `/private/var/root/Library/Caches/locationd/`
 * `/private/var/containers/Shared/SystemGroup/[GUID]/Library/BatteryLife`
@@ -59,7 +66,6 @@ You may see that APOLLO reports back "0 databases" found when executed, most lik
 * Accept Zip file input
 * Output Formats (JSON?)
 * Modules:
-  * Screen Time
   * Additional Health modules 
   * Additional Native App Specific Modules 
 
@@ -68,17 +74,4 @@ You may see that APOLLO reports back "0 databases" found when executed, most lik
 * Thanks to @AlexisBrignoni for Python 3 support.
 
 ## References
-* [Knowledge is Power! Using the macOS/iOS knowledgeC.db Database to Determine Precise User and Application Usage](https://www.mac4n6.com/blog/2018/8/5/knowledge-is-power-using-the-knowledgecdb-database-on-macos-and-ios-to-determine-precise-user-and-application-usage)
-* [Knowledge is Power II – A Day in the Life of My iPhone using knowledgeC.db](https://www.mac4n6.com/blog/2018/9/12/knowledge-is-power-ii-a-day-in-the-life-of-my-iphone-using-knowledgecdb)
-* [On the First Day of APOLLO, My True Love Gave to Me - A Python Script – An Introduction to the Apple Pattern of Life Lazy Output’er (APOLLO) Blog Series](https://www.mac4n6.com/blog/2018/12/14/on-the-first-day-of-apollo-my-true-love-gave-to-me-a-python-script-an-introduction-to-the-apple-pattern-of-life-lazy-outputer-apollo-blog-series)
-* [On the Second Day of APOLLO, My True Love Gave to Me - Holiday Treats and a Trip to the Gym - A Look at iOS Health Data](https://www.mac4n6.com/blog/2018/12/15/on-the-second-day-of-apollo-my-true-love-gave-to-me-holiday-treats-and-a-trip-to-the-gym-a-look-at-ios-health-data)
-* [On the Third Day of APOLLO, My True Love Gave to Me – Application Usage to Determine Who Has Been Naughty or Nice](https://www.mac4n6.com/blog/2018/12/16/on-the-third-day-of-apollo-my-true-love-gave-to-me-application-usage-to-determine-who-has-been-naughty-or-nice)
-* [On the Fourth Day of APOLLO, My True Love Gave to Me – Media Analysis to Prove You Listened to “All I Want for Christmas is You” Over and Over Since Before Thanksgiving](https://www.mac4n6.com/blog/2018/12/17/on-the-fourth-day-of-apollo-my-true-love-gave-to-me-media-analysis-to-prove-you-listened-to-all-i-want-for-christmas-is-you-over-and-over-since-before-thanksgiving)
-* [On the Fifth Day of APOLLO, My True Love Gave to Me – A Stocking Full of Random Junk, Some of Which Might be Useful!](https://www.mac4n6.com/blog/2018/12/18/on-the-fifth-day-of-apollo-my-true-love-gave-to-me-a-stocking-full-of-random-junk-some-of-which-might-be-useful)
-* [On the Sixth Day of APOLLO, My True Love Gave to Me – Blinky Things with Buttons – Device Status Analysis](https://www.mac4n6.com/blog/2018/12/19/on-the-sixth-day-of-apollo-my-true-love-gave-to-me-blinky-things-with-buttons-device-status-analysis)
-* [On the Seventh Day of APOLLO, My True Love Gave to Me – A Good Conversation – Analysis of Communications and Data Usage](https://www.mac4n6.com/blog/2018/12/20/on-the-seventh-day-of-apollo-my-true-love-gave-to-me-a-good-conversation-analysis-of-communications-and-data-usage)
-* [On the Eighth Day of APOLLO, My True Love Gave to Me – A Glorious Lightshow – Analysis of Device Connections](https://www.mac4n6.com/blog/2018/12/21/on-the-eighth-day-of-apollo-my-true-love-gave-to-me-a-glorious-lightshow-analysis-of-device-connections)
-* [On the Ninth Day of APOLLO, My True Love Gave to Me – A Beautiful Portrait – Analysis of the iOS Interface](https://www.mac4n6.com/blog/2018/12/22/on-the-ninth-day-of-apollo-my-true-love-gave-to-me-a-beautiful-portrait-analysis-of-the-ios-interface)
-* [On the Tenth Day of APOLLO, My True Love Gave to Me – An Oddly Detailed Map of My Recent Travels – iOS Location Analysis](https://www.mac4n6.com/blog/2018/12/23/on-the-tenth-day-of-apollo-my-true-love-gave-to-me-an-oddly-detailed-map-of-my-recent-travels-ios-location-analysisk)
-* [On the Eleventh Day of APOLLO, My True Love Gave to Me – An Intriguing Story – Putting it All Together: A Day in the Life of My iPhone using APOLLO](https://www.mac4n6.com/blog/2018/12/24/on-the-eleventh-day-of-apollo-my-true-love-gave-to-me-an-intriguing-story-putting-it-all-together-a-day-in-the-life-of-my-iphone-using-apollo)
-* [On the Twelfth Day of APOLLO, My True Love Gave to Me – A To Do List – Twelve Planned Improvements to APOLLO](https://www.mac4n6.com/blog/2018/12/25/on-the-twelfth-day-of-apollo-my-true-love-gave-to-me-a-to-do-list-twelve-planned-improvements-to-apollo)
+* Search APOLLO on mac4n6.com
