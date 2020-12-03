@@ -63,14 +63,14 @@ MODULE_NOTES=Screen Time - Generic (By Hour)
 [Database Metadata]
 DATABASE=RMAdminStore-Local.sqlite,RMAdminStore-Cloud.sqlite
 PLATFORM=IOS,MACOS
-VERSIONS=12,13,10.15
+VERSIONS=12,13,10.15,10.16,14
 
 [Query Metadata]
 QUERY_NAME=screentime_by_hour
 ACTIVITY=Screen Time - Generic (By Hour)
 KEY_TIMESTAMP=HOUR
 
-[SQL Query 13,10.15]
+[SQL Query 13,10.15,10.16,14]
 QUERY=
 	SELECT
 		DISTINCT

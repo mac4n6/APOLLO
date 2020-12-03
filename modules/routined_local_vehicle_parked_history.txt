@@ -63,14 +63,14 @@ MODULE_NOTES=Parked Vehicle - Historical Locations
 [Database Metadata]
 DATABASE=Local.sqlite
 PLATFORM=IOS
-VERSIONS=11,12,13
+VERSIONS=11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=routined_local_vehicle_parked_history
 ACTIVITY=Routined Location - Vehicle Park History
 KEY_TIMESTAMP=DATE
 
-[SQL Query 11,12,13]
+[SQL Query 11,12,13,14]
 QUERY=
 	SELECT
 	   DATETIME(ZRTVEHICLEEVENTHISTORYMO.ZDATE + 978307200, 'UNIXEPOCH') AS "DATE",

@@ -63,14 +63,14 @@ MODULE_NOTES=Screen Time - App (By Hour)
 [Database Metadata]
 DATABASE=RMAdminStore-Local.sqlite,RMAdminStore-Cloud.sqlite
 PLATFORM=IOS,MACOS
-VERSIONS=12,13,10.15
+VERSIONS=12,13,10.15,10.16,14
 
 [Query Metadata]
 QUERY_NAME=screentime_timed_items
 ACTIVITY=Screen Time - App (By Hour)
 KEY_TIMESTAMP=HOUR
 
-[SQL Query 13,10.15]
+[SQL Query 13,10.15,10.16,14]
 QUERY=
 	SELECT 
 		DATETIME(ZUSAGEBLOCK.ZSTARTDATE+978307200,'UNIXEPOCH') AS 'HOUR',

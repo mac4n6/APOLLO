@@ -63,14 +63,14 @@ MODULE_NOTES=Records which Springboard screen device is on. Homescreen(s)=2 Widg
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORM=IOS
-VERSIONS=9,10,11,12,13
+VERSIONS=9,10,11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=powerlog_device_screen
 ACTIVITY=Springboard Screen State
 KEY_TIMESTAMP=ADJUSTED_TIMESTAMP
 
-[SQL Query 9,10,11,12,13]
+[SQL Query 9,10,11,12,13,14]
 QUERY=
    	SELECT
 		DATETIME(SCREENSTATE_TIMESTAMP + SYSTEM, 'UNIXEPOCH') AS ADJUSTED_TIMESTAMP,

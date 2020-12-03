@@ -63,14 +63,14 @@ MODULE_NOTES=Telephony Activity
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORM=IOS
-VERSIONS=9,10,11,12,13
+VERSIONS=9,10,11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=powerlog_device_telephony_activity
 ACTIVITY=Telephony Activity
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query 9,10,11,12,13]
+[SQL Query 9,10,11,12,13,14]
 QUERY=
    SELECT
       DATETIME(TIMESTAMP, 'UNIXEPOCH') AS TIMESTAMP,

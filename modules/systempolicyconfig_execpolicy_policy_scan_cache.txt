@@ -63,14 +63,14 @@ MODULE_NOTES=System Policy Configuration - ExecPolicy - Policy Scan Cache
 [Database Metadata]
 DATABASE=ExecPolicy
 PLATFORM=MACOS
-VERSIONS=10.15
+VERSIONS=10.15,10.16
 
 [Query Metadata]
 QUERY_NAME=systempolicyconfig_execpolicy_policy_scan_cache
 ACTIVITY=System Policy Configuration - Policy Scan Cache
 KEY_TIMESTAMP=TIMESTAMP
 
-[SQL Query 10.15]
+[SQL Query 10.15,10.16]
 QUERY=
 	SELECT  
 		DATETIME(TIMESTAMP,'UNIXEPOCH') AS 'TIMESTAMP',

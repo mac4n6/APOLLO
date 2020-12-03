@@ -63,14 +63,14 @@ MODULE_NOTES=Application usage by hour
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORM=IOS
-VERSIONS=9,10,11,12,13
+VERSIONS=9,10,11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=powerlog_app_usage_by_hour
 ACTIVITY=App Usage by Hour
 KEY_TIMESTAMP=HOUR OF DAY
 
-[SQL Query 10,11,12,13]
+[SQL Query 10,11,12,13,14]
 QUERY=
 	SELECT
 		DATETIME(APPUSAGE_TIMESTAMP + SYSTEM, 'UNIXEPOCH') AS "HOUR OF DAY",

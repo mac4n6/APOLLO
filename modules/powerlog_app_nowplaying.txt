@@ -63,14 +63,14 @@ MODULE_NOTES=What app/service is playing something, or not.
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORM=IOS
-VERSIONS=10,11,12,13
+VERSIONS=10,11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=powerlog_app_nowplaying
 ACTIVITY=App Now Playing
 KEY_TIMESTAMP=ADJUSTED_TIMESTAMP
 
-[SQL Query 10,11,12,13]
+[SQL Query 10,11,12,13,14]
 QUERY=
    SELECT
       DATETIME(NOWPLAYING_TIMESTAMP + SYSTEM, 'UNIXEPOCH') AS ADJUSTED_TIMESTAMP,

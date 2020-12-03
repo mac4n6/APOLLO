@@ -63,14 +63,14 @@ MODULE_NOTES=System Policy Configuration - KextPolicy - Kext Load History V3
 [Database Metadata]
 DATABASE=KextPolicy
 PLATFORM=macOS
-VERSIONS=10.14,10.15
+VERSIONS=10.14,10.15,10.16
 
 [Query Metadata]
 QUERY_NAME=systempolicyconfig_kextpolicy_kext_load_history_v3
 ACTIVITY=System Policy Configuration - Kext Load History
 KEY_TIMESTAMP=CREATED AT
 
-[SQL Query 10.15]
+[SQL Query 10.15,10.16]
 QUERY=
 	SELECT
 		CREATED_AT AS 'CREATED AT',

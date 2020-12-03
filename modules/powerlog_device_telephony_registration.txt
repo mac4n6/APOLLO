@@ -63,14 +63,14 @@ MODULE_NOTES=Records telephony registration details such AS carrier and service.
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORM=IOS
-VERSIONS=9,10,11,12,13
+VERSIONS=9,10,11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=powerlog_device_telephony_registration
 ACTIVITY=Telephony Registration
 KEY_TIMESTAMP=ADJUSTED_TIMESTAMP
 
-[SQL Query 9,10,11,12,13]
+[SQL Query 9,10,11,12,13,14]
 QUERY=
    	SELECT
 		DATETIME(TELEPHONYREG_TIMESTAMP + SYSTEM, 'UNIXEPOCH') AS ADJUSTED_TIMESTAMP,

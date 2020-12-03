@@ -63,14 +63,14 @@ MODULE_NOTES=Visit Locations
 [Database Metadata]
 DATABASE=Cache.sqlite,CoreRoutine.sqlite
 PLATFORM=IOS
-VERSIONS=13
+VERSIONS=13,14
 
 [Query Metadata]
 QUERY_NAME=routined_cache_zrvisitmo
 ACTIVITY=Routined Location - Entry
 KEY_TIMESTAMP=ENTRY TIMESTAMP
 
-[SQL Query 13]
+[SQL Query 13,14]
 QUERY=
    SELECT
 		DATETIME(ZENTRYDATE + 978307200, 'UNIXEPOCH') AS "ENTRY TIMESTAMP",

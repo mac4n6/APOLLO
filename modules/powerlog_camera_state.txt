@@ -63,14 +63,14 @@ MODULE_NOTES=Records when and which camera is in use.
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORM=IOS,MACOS
-VERSIONS=11,12,13,10.15
+VERSIONS=11,12,13,10.15,10.16,14
 
 [Query Metadata]
 QUERY_NAME=powerlog_camera_state
 ACTIVITY=Camera State
 KEY_TIMESTAMP=ADJUSTED_TIMESTAMP
 
-[SQL Query 10.15]
+[SQL Query 10.15,10.16]
 QUERY=
    SELECT
          DATETIME(CAMERA_TIMESTAMP + SYSTEM, 'UNIXEPOCH') AS ADJUSTED_TIMESTAMP,
@@ -116,7 +116,7 @@ QUERY=
                CAMERA_ID 
          )
 
-[SQL Query 11,12,13]
+[SQL Query 11,12,13,14]
 QUERY=
    SELECT
       DATETIME(CAMERA_TIMESTAMP + SYSTEM, 'unixepoch') AS ADJUSTED_TIMESTAMP,

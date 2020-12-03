@@ -63,14 +63,14 @@ MODULE_NOTES=Applications that have been recently deleted.
 [Database Metadata]
 DATABASE=CurrentPowerlog.PLSQL
 PLATFORM=IOS
-VERSIONS=9,10,11,12,13
+VERSIONS=9,10,11,12,13,14
 
 [Query Metadata]
 QUERY_NAME=powerlog_app_deletion
 ACTIVITY=App Deletion
 KEY_TIMESTAMP=APP DELETED DATE
 
-[SQL Query 11,12,13]
+[SQL Query 11,12,13,14]
 QUERY=
 	SELECT
 		DATETIME(APPDELETEDDATE, 'UNIXEPOCH') AS "APP DELETED DATE",
