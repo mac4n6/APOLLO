@@ -63,7 +63,7 @@ MODULE_NOTES=Knowledge Sync Deletion Bookmark
 [Database Metadata]
 DATABASE=knowledgeC.db
 PLATFORM=IOS,MACOS
-VERSIONS=12.13,10.14,10.15,14
+VERSIONS=12,13,10.14,10.15,14
 
 [Query Metadata]
 QUERY_NAME=knowledge_sync_deletion_bookmark

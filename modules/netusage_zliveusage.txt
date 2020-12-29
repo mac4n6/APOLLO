@@ -62,7 +62,7 @@ MODULE_NOTES=Network Usage Traffic by Process.
 
 [Database Metadata]
 DATABASE=netusage.sqlite
-PLATFORM=IOS
+PLATFORM=IOS,MACOS
 VERSIONS=8,9,10,11,12,13,10.13,10.14,10.15,10.16,14
 
 [Query Metadata]
