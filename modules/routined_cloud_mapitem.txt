@@ -63,7 +63,7 @@ MODULE_NOTES=Map Item
 [Database Metadata]
 DATABASE=Cloud.sqlite,Cloud-V2.sqlite
 PLATFORM=IOS
-VERSIONS=13,14
+VERSIONS=12,13,14
 
 [Query Metadata]
 QUERY_NAME=routined_cloud_mapitem

@@ -63,7 +63,7 @@ MODULE_NOTES=System Policy Configuration - KextPolicy - Kext Load History V3
 [Database Metadata]
 DATABASE=KextPolicy
 PLATFORM=macOS
-VERSIONS=10.14,10.15,10.16
+VERSIONS=10.13,10.14,10.15,10.16
 
 [Query Metadata]
 QUERY_NAME=systempolicyconfig_kextpolicy_kext_load_history_v3

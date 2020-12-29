@@ -63,7 +63,7 @@ MODULE_NOTES=System Policy Configuration - ExecPolicy - Executable Measurements
 [Database Metadata]
 DATABASE=ExecPolicy
 PLATFORM=MACOS
-VERSIONS=10.15,10.16
+VERSIONS=10.14,10.15,10.16
 
 [Query Metadata]
 QUERY_NAME=systempolicyconfig_execpolicy_exec_measurements_v2

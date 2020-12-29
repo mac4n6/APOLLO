@@ -66,7 +66,7 @@ PLATFORM=IOS,MACOS
 VERSIONS=8,9,10,11,12,13,10.14,10.15,10.16,14
 
 [Query Metadata]
-QUERY_NAME=sms_chat
+QUERY_NAME=sms_chat_message_read
 ACTIVITY=SMS Chat - Message Read
 KEY_TIMESTAMP=DATE READ
 
