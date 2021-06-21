@@ -70,6 +70,8 @@ import shutil
 import subprocess
 import stat
 import json
+from zipfile import ZipFile
+import fnmatch
 
 def gathermacos(database_names):
 	tempdir()
@@ -131,6 +133,27 @@ def gatherios(database_names):
 						subprocess.Popen(['scp','-P'+port,'-T',server+line_escape,output]).wait()
 	chown_chmod()
 
+def gatherfromzip(database_names):
+	
+	tempdir()
+	tmpdir = os.getcwd() + "/tmp_apollo"
+
+	zip_file = ZipFile(data_dir)
+	name_list = zip_file.namelist()
+	
+	for pattern in database_names:
+		pattern = f'*{pattern}'
+		for member in name_list:
+			if fnmatch.fnmatch(member, pattern):
+				try:
+					extracted_path = zip_file.extract(member, path=tmpdir)
+				except Exception as ex:
+					member = member.lstrip("/")
+					logfunc(f'Could not write file to filesystem, path was {member} ' + str(ex))
+
+	zip_file.close()
+	chown_chmod()
+	
 def tempdir():
 	tmpdir = os.getcwd() + "/tmp_apollo"
 	print("...Creating /tmp_apollo in: " + tmpdir)
@@ -154,7 +177,7 @@ def extractdata(mod_info,database_names):
 	print("\n==> Parsing", len(mod_info), "modules (Note: Some modules may be run on more than one database.)")
 	count = 1
 	modules = set()
-
+	
 	for item in sorted(mod_info):
 		dbs = item.split('#')
 		for mod in dbs:
@@ -331,7 +354,9 @@ def parse_module_definition(mod_info):
 		gathermacos(database_names)
 	elif subparser == 'gather_ios': 
 		gatherios(database_names)
-
+	elif subparser == 'gather_from_zip': 
+		gatherfromzip(database_names)
+		
 if __name__ == "__main__":
 
 	parser = argparse.ArgumentParser(description="\
@@ -353,6 +378,9 @@ if __name__ == "__main__":
 
 	gather_macos = subparsers.add_parser('gather_macos'
 		, help='Gather Files from MacOS System')
+	
+	gather_from_zip = subparsers.add_parser('gather_from_zip'
+		, help='Gather Files from Zip file')
 	
 	gather_ios = subparsers.add_parser('gather_ios'
 		, help='Gather from Jailbroken iOS Device (IP/Port Required)')
@@ -497,5 +525,6 @@ if __name__ == "__main__":
 	except:
 		pass
 
-	if subparser in ['gather_macos','gather_ios']:
+	if subparser in ['gather_macos','gather_ios', 'gather_from_zip']:
 		parse_module_definition(mod_info)
+		
