@@ -69,6 +69,7 @@ import re
 import shutil
 import subprocess
 import stat
+import tarfile
 import json
 from zipfile import ZipFile
 import fnmatch
@@ -149,9 +150,40 @@ def gatherfromzip(database_names):
 					extracted_path = zip_file.extract(member, path=tmpdir)
 				except Exception as ex:
 					member = member.lstrip("/")
-					logfunc(f'Could not write file to filesystem, path was {member} ' + str(ex))
-
+					print(f'Could not write file to filesystem, path was {member} ' + str(ex))
+	
+	print(f'...Data gathered from Zip location: {tmpdir}')
 	zip_file.close()
+	chown_chmod()
+	
+def gatherfromtar(database_names):
+	tempdir()
+	tmpdir = os.getcwd() + "/tmp_apollo"
+	
+	is_gzip = data_dir.lower().endswith('gz')
+	mode ='r:gz' if is_gzip else 'r'
+	tar_file = tarfile.open(data_dir, mode)
+	
+	for pattern in database_names:
+		pattern = f'*{pattern}'
+		
+		for member in tar_file.getmembers():
+			if fnmatch.fnmatch('root/' + member.name, pattern):
+				try:
+					full_path = os.path.join(tmpdir, member.name)
+					if member.isdir():
+						os.makedirs(full_path, exist_ok=True)
+					else:
+						parent_dir = os.path.dirname(full_path)
+						if not os.path.exists(parent_dir):
+							os.makedirs(parent_dir)
+						with open(full_path, "wb") as fout:
+							fout.write(tarfile.ExFileObject(tar_file, member).read())
+							fout.close()
+						os.utime(full_path, (member.mtime, member.mtime))
+				except Exception as ex:
+					print(f'Could not write file to filesystem, path was {member.name} ' + str(ex))
+	print(f'...Data gathered from Tar location: {tmpdir}')
 	chown_chmod()
 	
 def tempdir():
@@ -356,6 +388,8 @@ def parse_module_definition(mod_info):
 		gatherios(database_names)
 	elif subparser == 'gather_from_zip': 
 		gatherfromzip(database_names)
+	elif subparser == 'gather_from_tar': 
+			gatherfromtar(database_names)
 		
 if __name__ == "__main__":
 
@@ -381,6 +415,9 @@ if __name__ == "__main__":
 	
 	gather_from_zip = subparsers.add_parser('gather_from_zip'
 		, help='Gather Files from Zip file')
+	
+	gather_from_tar = subparsers.add_parser('gather_from_tar'
+			, help='Gather Files from Tar file')
 	
 	gather_ios = subparsers.add_parser('gather_ios'
 		, help='Gather from Jailbroken iOS Device (IP/Port Required)')
@@ -525,6 +562,6 @@ if __name__ == "__main__":
 	except:
 		pass
 
-	if subparser in ['gather_macos','gather_ios', 'gather_from_zip']:
+	if subparser in ['gather_macos','gather_ios', 'gather_from_zip', 'gather_from_tar']:
 		parse_module_definition(mod_info)
 		
