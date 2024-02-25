@@ -44,7 +44,7 @@
 * Windows 10 `win10_1803`, `win10_1809`, `win10_1903`, `win10_1909`
 * `yolo` - Just parse whatever. Will use all available queries. Be careful with this option as you may get redundant data.
 
-## Getting Errors? Try This (Windows users, use eqivlent commands)
+## Getting Errors? Try This (Windows users, use equivalent commands)
 
 * Pro Tip: The 'gather' functions chmod/chown the files to ensure they are accessible.
 
